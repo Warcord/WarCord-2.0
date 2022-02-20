@@ -6,8 +6,8 @@ This is a package to simplify use of Wargaming API.
 
 ## Initial Files:
 ```js
-const { Warcord } = require('warcord')
-const warcord = new Warcord('your-app-id')
+const { WarCord } = require('warcord')
+const warcord = new WarCord('your-app-id')
 ```
 
 # Useful Links
