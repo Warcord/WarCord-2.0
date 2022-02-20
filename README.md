@@ -1,6 +1,6 @@
 # WarCord
 
-This is a package to simplify use of Wargaming API on Discord.
+This is a package to simplify use of Wargaming API.
 
 [![NPM](https://nodei.co/npm/warcord.png)](https://nodei.co/npm/warcord/)
 
