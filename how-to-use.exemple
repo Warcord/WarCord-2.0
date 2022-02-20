@@ -1,0 +1,2 @@
+const { WarCord } = require('warcord')
+const warcord = new WarCord('your-app-id')
