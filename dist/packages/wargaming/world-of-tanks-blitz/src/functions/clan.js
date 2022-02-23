@@ -16,13 +16,13 @@ exports.WOTBClan = void 0;
 const base_1 = require("../../../../../builds/class/base");
 const axios_1 = __importDefault(require("axios"));
 class WOTBClan extends base_1.BaseClass {
-    constructor(app_id) {
+    constructor(app_id, lang) {
         super(app_id);
-        this.app = { id: app_id };
+        this.app = { id: app_id, lang: lang };
     }
     get(clanID) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.wotblitz.com/wotb/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
             if (data.status == "error")
                 return null;
             return data.data[clanID];
@@ -30,7 +30,7 @@ class WOTBClan extends base_1.BaseClass {
     }
     search(clanNameOrTag) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.wotblitz.com/wotb/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
             if (data.status == "error" || data.data.length <= 0)
                 return null;
             return data.data;

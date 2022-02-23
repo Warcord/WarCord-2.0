@@ -16,9 +16,9 @@ exports.WorldOfTanksTank = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
 class WorldOfTanksTank extends base_1.BaseClass {
-    constructor(app_id) {
+    constructor(app_id, lang) {
         super(app_id);
-        this.app = { id: app_id };
+        this.app = { id: app_id, lang: lang };
     }
     /**
      * Get a tank by ID.
@@ -27,7 +27,7 @@ class WorldOfTanksTank extends base_1.BaseClass {
      */
     get(tankID) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.com/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data[tankID];

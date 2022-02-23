@@ -4,8 +4,8 @@
   "description": "A Simple lib with wargaming API",
   "author": "GardZock",
   "license": "Apache-2.0",
-  "main": "dist/warcord/index.js",
-  "types": "dist/warcord/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "dev": "tsnd --respawn --transpile-only tests/tests.ts",
     "tscd": "tsc --declaration"

@@ -9,10 +9,12 @@ import { BaseClass } from './builds/class/base';
 declare class WarCord extends BaseClass {
     app: {
         id: string;
+        lang?: string;
     };
     wargaming: WargamingBase;
-    constructor(app_id: string);
-    private checker;
+    constructor(app_id: string, lang?: string);
+    private idChecker;
+    private langChecker;
 }
 export { WarCord };
 export { WOTClanResolve, WOTClanSearchResolve, WOTTanksResolve, WOTTopTanksResolve, WOTUserResolve, UserSearchResolve };
