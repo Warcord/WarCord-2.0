@@ -4,10 +4,10 @@ import { BaseClass } from '../../../../../builds/class/base'
 
 class WorldOfTanksTank extends BaseClass {
 
-    app: { id: string }
-    constructor(app_id: string) {
+    app: { id: string, lang?: string }
+    constructor(app_id: string, lang?: string) {
         super(app_id)
-        this.app = { id: app_id }
+        this.app = { id: app_id, lang: lang }
     }
 
     /**
@@ -17,7 +17,7 @@ class WorldOfTanksTank extends BaseClass {
      */
     
     public async get(tankID: number | string): Promise<WOTTanksResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.com/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
         if (data.status == "error") return null
         data = data.data[tankID]
 

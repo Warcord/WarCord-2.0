@@ -7,10 +7,10 @@ import { WOWSUserResolve } from '../interfaces/user/result'
 
 class WOWSUser extends BaseClass {
 
-    app: { id: string }
-    constructor(app_id: string) {
+    app: { id: string, lang?: string }
+    constructor(app_id: string, lang?: string) {
         super(app_id)
-        this.app = { id: app_id }
+        this.app = { id: app_id, lang: lang }
     }
 
     /**
@@ -20,7 +20,7 @@ class WOWSUser extends BaseClass {
      */
 
     public async search(userName: string): Promise<UserSearchResolve[] | null> {
-        const searchUser = await ((await axios.get(`https://api.worldofwarships.com/wows/account/list/?application_id=${this.app?.id}&search=${userName}`)).data).data
+        const searchUser = await ((await axios.get(`https://api.worldofwarships.${this.app.lang}/wows/account/list/?application_id=${this.app?.id}&search=${userName}`)).data).data
         if (!searchUser || searchUser.length <= 0) return null
         return searchUser
     }
@@ -32,7 +32,7 @@ class WOWSUser extends BaseClass {
      */
 
     public async get(userID: number | string): Promise<WOWSUserResolve | null> {
-        let data = await (await axios.get(`https://api.worldofwarships.com/wows/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
+        let data = await (await axios.get(`https://api.worldofwarships.${this.app.lang}/wows/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
         if (data.status == "error") return null
         data = data.data[userID]
 

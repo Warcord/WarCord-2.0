@@ -6,10 +6,10 @@ import { BaseClass } from '../../../../../builds/class/base'
 
 class WorldOfTanksUser extends BaseClass {
 
-    app: { id: string }
-    constructor(app_id: string) {
+    app: { id: string, lang?: string }
+    constructor(app_id: string, lang?: string) {
         super(app_id)
-        this.app = { id: app_id }
+        this.app = { id: app_id, lang: lang }
     }
 
     /**
@@ -19,7 +19,7 @@ class WorldOfTanksUser extends BaseClass {
      */
 
     public async search(userName: string): Promise<UserSearchResolve[] | null> {
-        const searchUser = await ((await axios.get(`https://api.worldoftanks.com/wot/account/list/?application_id=${this.app?.id}&search=${userName}`)).data).data
+        const searchUser = await ((await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/account/list/?application_id=${this.app?.id}&search=${userName}`)).data).data
         if (!searchUser || searchUser.length <= 0) return null
         return searchUser
     }
@@ -31,7 +31,7 @@ class WorldOfTanksUser extends BaseClass {
      */
 
     public async get(userID: number | string): Promise<WOTUserResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.com/wot/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
         if (data.status == "error") return null
         data = data.data[userID]
 
@@ -56,7 +56,7 @@ class WorldOfTanksUser extends BaseClass {
      * @returns {Object[]} Object Array with tanks data.
      */
     public async topTanks(userID: number | string): Promise<WOTTopTanksResolve[] | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.com/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data
         if (data.status == "error") return null
         data = data.data[userID]
         data.length = 5

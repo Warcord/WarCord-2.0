@@ -10,23 +10,39 @@ import { BaseClass } from './builds/class/base'
 class WarCord extends BaseClass {
 
     app: {
-        id: string
+        id: string,
+        lang?: string
     }
     wargaming: WargamingBase
 
-    constructor(app_id: string) {
+    constructor(app_id: string, lang?: string) {
         super(app_id)
-        this.app = { id: this.checker(app_id) }
-        this.wargaming = new WargamingBase(app_id)
+        this.app = { id: this.idChecker(app_id), lang: this.langChecker(lang) }
+        this.wargaming = new WargamingBase(app_id, lang)
     }
 
-    private checker(id: string): string {
+    private idChecker(id: string): string {
         if (!id || id.length <= 0) {
             console.log('[WarCord] Your API ID is empty. (using Wargaming API)')
             return ''
         } else {
             return id
         }
+    }
+
+    private langChecker(lang: string | undefined): string {
+        if (!lang) return 'com'
+        const langs = [
+            'na',
+            'eu',
+            'ru',
+            'asia'
+        ]
+
+        if (!langs.includes(lang)) { console.log('[WarCord] Your API Lang is not valid. (using Wargaming API)'); return 'com' }
+        if (lang = 'na') lang = 'com'
+
+        return lang
     }
 }
 

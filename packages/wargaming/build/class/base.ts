@@ -13,7 +13,10 @@ import { WOWSUser } from '../../world-of-warships/src/functions/user'
 import { WOWSShip } from '../../world-of-warships/src/functions/ship'
 class WargamingBase extends BaseClass implements WargamingApp {
 
-    app: { id: string }
+    app: {
+        id: string,
+        lang?: string
+    }
     wot: {
         user: WorldOfTanksUser,
         tank: WorldOfTanksTank,
@@ -29,9 +32,9 @@ class WargamingBase extends BaseClass implements WargamingApp {
         ship: WOWSShip
     }
 
-    constructor(app_id: string) {
+    constructor(app_id: string, lang?: string) {
         super(app_id)
-        this.app = { id: app_id }
+        this.app = { id: app_id, lang: lang }
         this.wot = {
             user: new WorldOfTanksUser(app_id),
             tank: new WorldOfTanksTank(app_id),
