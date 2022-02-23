@@ -11,6 +11,7 @@ import { WOTBClan } from '../../world-of-tanks-blitz/src/functions/clan'
 
 import { WOWSUser } from '../../world-of-warships/src/functions/user'
 import { WOWSShip } from '../../world-of-warships/src/functions/ship'
+import { WOWSClans } from '../../world-of-warships/src/functions/clan'
 class WargamingBase extends BaseClass implements WargamingApp {
 
     app: {
@@ -29,25 +30,27 @@ class WargamingBase extends BaseClass implements WargamingApp {
     }
     wows: {
         user: WOWSUser,
-        ship: WOWSShip
+        ship: WOWSShip,
+        clan: WOWSClans
     }
 
     constructor(app_id: string, lang?: string) {
         super(app_id)
         this.app = { id: app_id, lang: lang }
         this.wot = {
-            user: new WorldOfTanksUser(app_id),
-            tank: new WorldOfTanksTank(app_id),
-            clan: new WorldOfTanksClan(app_id)
+            user: new WorldOfTanksUser(app_id, lang),
+            tank: new WorldOfTanksTank(app_id, lang),
+            clan: new WorldOfTanksClan(app_id, lang)
         }
         this.blitz = {
-            user: new WOTBUser(app_id),
-            tank: new WOTBTank(app_id),
-            clan: new WOTBClan(app_id)
+            user: new WOTBUser(app_id, lang),
+            tank: new WOTBTank(app_id, lang),
+            clan: new WOTBClan(app_id, lang)
         }
         this.wows = {
-            user: new WOWSUser(app_id),
-            ship: new WOWSShip(app_id)
+            user: new WOWSUser(app_id, lang),
+            ship: new WOWSShip(app_id, lang),
+            clan: new WOWSClans(app_id, lang)
         }
     }
 }
