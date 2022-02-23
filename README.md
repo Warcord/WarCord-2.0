@@ -11,7 +11,7 @@ const warcord = new Warcord('your-app-id')
 ```
 
 # Useful Links
-- Discord Server (In creation)
+- Discord Server (canceled)
 
 # Credits
 
@@ -42,6 +42,14 @@ const warcord = new Warcord('your-app-id')
     - [Searching clan by name or tag](#searching-a-clan-by-name-or-tag-wotb)
 - [Tank](#tank-wotb)
     - [Getting a tank by ID](#getting-a-tank-by-id-wotb)
+
+> World of WarShips
+- [User](#user-wows)
+    - [Getting user by ID](#searching-a-user-by-id-wows)
+    - [Searching user by name](#searching-a-user-by-name-wows)
+- [Ships](#ship-wows)
+    - [Getting ships by User ID](#getting-ships-status-by-id-wows)
+
 
 # World Of Tanks Functions
 
@@ -116,8 +124,7 @@ const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
 //this returns an Object with tank data.
 ```
 
-
-
+# World of Tanks Blitz Functions
 
 ## User Wotb
 
@@ -178,4 +185,29 @@ const clan = await warcord.wargaming.blitz.clan.get(searchingClan[0].clan_id)
 ...
 const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
 //this returns an Object with tank data.
+```
+
+# World of WarShips Functions
+
+## User
+
+### Getting user by ID WOWS
+```js
+...
+const user = await warcord.wargaming.wows.user.get('ID of User')
+//this returns user data.
+```
+
+### Searching user by name WOWS
+```js
+...
+const user = await warcord.wargaming.wows.user.search('Name of User')
+//this returns user ID and Name.
+```
+
+### Getting ships status by User ID
+```js
+...
+const ships = await warcord.wargaming.wows.ship.get('ID of User')
+//this returns an Array with Ships Status.
 ```
