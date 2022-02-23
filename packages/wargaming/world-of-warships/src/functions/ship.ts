@@ -10,11 +10,11 @@ class WOWSShip extends BaseClass {
         this.app = { id: app_id }
     }
 
-    public async get(tankID: string | number): Promise<WOWSShipResolve[] | null> {
-        var data = await (await axios.get(`https://api.wotblitz.com/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
-        if (data.status == "error") return null
+    public async get(userID: string | number): Promise<WOWSShipResolve[] | null> {
+        var data = await (await axios.get(`https://api.worldofwarships.com/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
+        if (data.status == "error") return null;
 
-        return data.data[tankID]
+        return data.data[userID]
     }
 }
 

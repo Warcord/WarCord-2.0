@@ -5,7 +5,7 @@ import { BaseClass } from '../../../../../builds/class/base'
 
 import { WOWSUserResolve } from '../interfaces/user/result'
 
-class WorldOfWarShipsUser extends BaseClass {
+class WOWSUser extends BaseClass {
 
     app: { id: string }
     constructor(app_id: string) {
@@ -40,4 +40,4 @@ class WorldOfWarShipsUser extends BaseClass {
     }
 }
 
-export { WorldOfWarShipsUser }
+export { WOWSUser }
