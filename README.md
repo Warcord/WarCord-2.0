@@ -1,13 +1,13 @@
 # WarCord
 
-This is a package to simplify use of Wargaming API on Discord.
+This is a package to simplify use of Wargaming API.
 
 [![NPM](https://nodei.co/npm/warcord.png)](https://nodei.co/npm/warcord/)
 
 ## Initial Files:
 ```js
-const { Warcord } = require('warcord')
-const warcord = new Warcord('your-app-id')
+const { WarCord } = require('warcord')
+const warcord = new WarCord('your-app-id')
 ```
 
 # Useful Links
@@ -186,6 +186,7 @@ const clan = await warcord.wargaming.blitz.clan.get(searchingClan[0].clan_id)
 const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
 //this returns an Object with tank data.
 ```
+# World-of-Warships
 
 # World of WarShips Functions
 

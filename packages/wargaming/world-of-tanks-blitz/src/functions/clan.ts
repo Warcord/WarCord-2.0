@@ -18,6 +18,7 @@ class WOTBClan extends BaseClass {
 
     public async search(clanNameOrTag: string): Promise<any | null> {
         let data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
+
         if (data.status == "error" || data.data.length <= 0) return null
         return data.data
     }
