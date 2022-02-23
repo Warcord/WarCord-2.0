@@ -12,42 +12,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WOWSUser = void 0;
+exports.WOWSClans = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
-class WOWSUser extends base_1.BaseClass {
+class WOWSClans extends base_1.BaseClass {
     constructor(app_id, lang) {
         super(app_id);
         this.app = { id: app_id, lang: lang };
     }
     /**
-     * Search users with respective name.
-     * @param userName Name of user.
-     * @returns {Object[]} Object Array with users data.
+     * Get a clan in World of WarShips.
+     * @param clanID ID of clan.
+     * @returns {WOWSClansResolve} Clan data.
      */
-    search(userName) {
-        var _a;
+    get(clanID) {
         return __awaiter(this, void 0, void 0, function* () {
-            const searchUser = yield ((yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/account/list/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&search=${userName}`)).data).data;
-            if (!searchUser || searchUser.length <= 0)
+            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
+            if (data.status == "error")
                 return null;
-            return searchUser;
+            data = data.data[clanID];
+            return data;
         });
     }
     /**
-     * Get an user by ID.
-     * @param userID ID of user.
-     * @returns {Object} Object of user data.
+     * Get a array with clans data of respective name.
+     * @param clanNameOrTag Name or Tag of clan.
+     * @returns {ClanSearchResolve} Array with clan data.
      */
-    get(userID) {
-        var _a;
+    search(clanNameOrTag) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/account/info/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&account_id=${userID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
             if (data.status == "error")
                 return null;
-            data = data.data[userID];
+            data = data.data;
+            if (!data || data.length <= 0)
+                return null;
             return data;
         });
     }
 }
-exports.WOWSUser = WOWSUser;
+exports.WOWSClans = WOWSClans;

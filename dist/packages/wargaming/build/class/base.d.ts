@@ -1,14 +1,18 @@
-import { WorldOfTanksUser } from '../../world-of-tanks/src/functions/user';
+import { BaseClass } from '../../../../builds/class/base';
 import { WargamingApp } from '../interfaces/app';
+import { WorldOfTanksUser } from '../../world-of-tanks/src/functions/user';
 import { WorldOfTanksTank } from '../../world-of-tanks/src/functions/tank';
 import { WorldOfTanksClan } from '../../world-of-tanks/src/functions/clan';
-import { BaseClass } from '../../../../builds/class/base';
 import { WOTBUser } from '../../world-of-tanks-blitz/src/functions/user';
 import { WOTBTank } from '../../world-of-tanks-blitz/src/functions/tank';
 import { WOTBClan } from '../../world-of-tanks-blitz/src/functions/clan';
+import { WOWSUser } from '../../world-of-warships/src/functions/user';
+import { WOWSShip } from '../../world-of-warships/src/functions/ship';
+import { WOWSClans } from '../../world-of-warships/src/functions/clan';
 declare class WargamingBase extends BaseClass implements WargamingApp {
     app: {
         id: string;
+        lang?: string;
     };
     wot: {
         user: WorldOfTanksUser;
@@ -20,6 +24,11 @@ declare class WargamingBase extends BaseClass implements WargamingApp {
         tank: WOTBTank;
         clan: WOTBClan;
     };
-    constructor(app_id: string);
+    wows: {
+        user: WOWSUser;
+        ship: WOWSShip;
+        clan: WOWSClans;
+    };
+    constructor(app_id: string, lang?: string);
 }
 export { WargamingBase };

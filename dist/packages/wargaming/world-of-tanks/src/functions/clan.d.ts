@@ -4,8 +4,9 @@ import { BaseClass } from '../../../../../builds/class/base';
 declare class WorldOfTanksClan extends BaseClass {
     app: {
         id: string;
+        lang?: string;
     };
-    constructor(app_id: string);
+    constructor(app_id: string, lang?: string);
     /**
      * Get a clan in World of Tanks.
      * @param clanID ID of clan.

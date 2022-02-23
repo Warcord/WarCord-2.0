@@ -16,16 +16,16 @@ exports.WOWSShip = void 0;
 const base_1 = require("../../../../../builds/class/base");
 const axios_1 = __importDefault(require("axios"));
 class WOWSShip extends base_1.BaseClass {
-    constructor(app_id) {
+    constructor(app_id, lang) {
         super(app_id);
-        this.app = { id: app_id };
+        this.app = { id: app_id, lang: lang };
     }
-    get(tankID) {
+    get(userID) {
         return __awaiter(this, void 0, void 0, function* () {
-            var data = yield (yield axios_1.default.get(`https://api.wotblitz.com/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
+            var data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data;
             if (data.status == "error")
                 return null;
-            return data.data[tankID];
+            return data.data[userID];
         });
     }
 }

@@ -16,13 +16,13 @@ exports.WOTBUser = void 0;
 const base_1 = require("../../../../../builds/class/base");
 const axios_1 = __importDefault(require("axios"));
 class WOTBUser extends base_1.BaseClass {
-    constructor(app_id) {
+    constructor(app_id, lang) {
         super(app_id);
-        this.app = { id: app_id };
+        this.app = { id: app_id, lang: lang };
     }
     get(userID) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.wotblitz.com/wotb/account/info/?application_id=${this.app.id}&account_id=${userID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/account/info/?application_id=${this.app.id}&account_id=${userID}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data[userID];
@@ -40,7 +40,7 @@ class WOTBUser extends base_1.BaseClass {
     }
     search(userName) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.wotblitz.com/wotb/account/list/?application_id=${this.app.id}&search=${userName}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/account/list/?application_id=${this.app.id}&search=${userName}`)).data;
             if (data.status == "error" || data.data.length <= 0)
                 return null;
             return data.data;
@@ -48,7 +48,7 @@ class WOTBUser extends base_1.BaseClass {
     }
     topTanks(userID) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.wotblitz.com/wotb/tanks/stats/?application_id=${this.app.id}&account_id=${userID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/tanks/stats/?application_id=${this.app.id}&account_id=${userID}`)).data;
             if (data.status == "error" || data.data.length <= 0)
                 return null;
             data = data.data[userID];
