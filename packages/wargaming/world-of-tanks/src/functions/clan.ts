@@ -5,10 +5,10 @@ import { BaseClass } from '../../../../../builds/class/base'
 
 class WorldOfTanksClan extends BaseClass {
 
-    app: { id: string }
-    constructor(app_id: string) {
+    app: { id: string, lang?: string }
+    constructor(app_id: string, lang?: string) {
         super(app_id)
-        this.app = { id: app_id }
+        this.app = { id: app_id, lang: lang }
     }
 
     /**
@@ -18,7 +18,7 @@ class WorldOfTanksClan extends BaseClass {
      */
 
     public async get(clanID: number | string): Promise<WOTClanResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.com/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
         if (data.status == "error") return null
         data = data.data[clanID]
         return {
@@ -52,7 +52,7 @@ class WorldOfTanksClan extends BaseClass {
      * @returns {ClanSearchResolve} Array with clan data.
      */
     public async search(clanNameOrTag: string): Promise<WOTClanSearchResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.com/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
         if (data.status == "error") return null
         data = data.data
         if (!data || data.length <= 0) return null
@@ -65,7 +65,7 @@ class WorldOfTanksClan extends BaseClass {
      * @returns {Object} Clan rating.
      */
     public async rating(clanID: string | number): Promise<any | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.com/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data
         if (data.status == "error") return null
         data = data.data[clanID]
         return data

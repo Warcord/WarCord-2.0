@@ -1,11 +1,12 @@
 import { UserSearchResolve } from '../../../build/interfaces/search-resolve';
 import { BaseClass } from '../../../../../builds/class/base';
 import { WOWSUserResolve } from '../interfaces/user/result';
-declare class WorldOfWarShipsUser extends BaseClass {
+declare class WOWSUser extends BaseClass {
     app: {
         id: string;
+        lang?: string;
     };
-    constructor(app_id: string);
+    constructor(app_id: string, lang?: string);
     /**
      * Search users with respective name.
      * @param userName Name of user.
@@ -19,4 +20,4 @@ declare class WorldOfWarShipsUser extends BaseClass {
      */
     get(userID: number | string): Promise<WOWSUserResolve | null>;
 }
-export { WorldOfWarShipsUser };
+export { WOWSUser };

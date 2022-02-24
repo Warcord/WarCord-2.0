@@ -16,13 +16,13 @@ exports.WOTBTank = void 0;
 const base_1 = require("../../../../../builds/class/base");
 const axios_1 = __importDefault(require("axios"));
 class WOTBTank extends base_1.BaseClass {
-    constructor(app_id) {
+    constructor(app_id, lang) {
         super(app_id);
-        this.app = { id: app_id };
+        this.app = { id: app_id, lang: lang };
     }
     get(tankID) {
         return __awaiter(this, void 0, void 0, function* () {
-            var data = yield (yield axios_1.default.get(`https://api.wotblitz.com/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
+            var data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
             if (data.status == "error")
                 return null;
             return data.data[tankID];

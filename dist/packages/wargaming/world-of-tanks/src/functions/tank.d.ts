@@ -3,8 +3,9 @@ import { BaseClass } from '../../../../../builds/class/base';
 declare class WorldOfTanksTank extends BaseClass {
     app: {
         id: string;
+        lang?: string;
     };
-    constructor(app_id: string);
+    constructor(app_id: string, lang?: string);
     /**
      * Get a tank by ID.
      * @param tankID ID of Tank.
