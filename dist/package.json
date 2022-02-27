@@ -14,6 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/Warcord/WarCord-Lib.git"
   },
+  "keywords": [
+    "wargaming",
+    "wot",
+    "worldoftanks",
+    "wotb",
+    "worldoftanksblitz",
+    "wows",
+    "worldofwarships."
+  ],
   "bugs": {
     "url": "https://github.com/Warcord/WarCord-Lib/issues"
   },
