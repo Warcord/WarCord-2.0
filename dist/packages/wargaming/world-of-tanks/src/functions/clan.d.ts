@@ -1,6 +1,7 @@
+import { BaseClass } from '../../../../../builds/class/base';
 import { WOTClanResolve } from '../interfaces/clan/clan-resolve';
 import { WOTClanSearchResolve } from '../interfaces/clan/search-resolve';
-import { BaseClass } from '../../../../../builds/class/base';
+import { WOTMember } from '../interfaces/clan/member';
 declare class WorldOfTanksClan extends BaseClass {
     app: {
         id: string;
@@ -25,5 +26,11 @@ declare class WorldOfTanksClan extends BaseClass {
      * @returns {Object} Clan rating.
      */
     rating(clanID: string | number): Promise<any | null>;
+    /**
+     * Get the clan member data.
+     * @param memberID ID of Clan Member.
+     * @returns {Object} Clan Member data.
+     */
+    member(memberID: string | number): Promise<WOTMember | null>;
 }
 export { WorldOfTanksClan };

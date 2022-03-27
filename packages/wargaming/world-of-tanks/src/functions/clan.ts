@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { BaseClass } from '../../../../../builds/class/base'
 import { WOTClanResolve } from '../interfaces/clan/clan-resolve'
 import { WOTClanSearchResolve } from '../interfaces/clan/search-resolve'
-import { BaseClass } from '../../../../../builds/class/base'
+import { WOTMember } from '../interfaces/clan/member'
 
 class WorldOfTanksClan extends BaseClass {
 
@@ -69,6 +70,18 @@ class WorldOfTanksClan extends BaseClass {
         if (data.status == "error") return null
         data = data.data[clanID]
         return data
+    }
+
+    /**
+     * Get the clan member data.
+     * @param memberID ID of Clan Member.
+     * @returns {Object} Clan Member data.
+     */
+    public async member(memberID: string | number): Promise<WOTMember | null> {
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data
+        if (data.status == "error") return null
+
+        return data.data[memberID]
     }
 }
 

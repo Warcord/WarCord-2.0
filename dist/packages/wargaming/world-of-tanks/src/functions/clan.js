@@ -86,5 +86,18 @@ class WorldOfTanksClan extends base_1.BaseClass {
             return data;
         });
     }
+    /**
+     * Get the clan member data.
+     * @param memberID ID of Clan Member.
+     * @returns {Object} Clan Member data.
+     */
+    member(memberID) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data;
+            if (data.status == "error")
+                return null;
+            return data.data[memberID];
+        });
+    }
 }
 exports.WorldOfTanksClan = WorldOfTanksClan;
