@@ -6,6 +6,9 @@
   "license": "Apache-2.0",
   "main": "dist/warcord/index.js",
   "types": "dist/warcord/index.d.ts",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "dev": "tsnd --respawn --transpile-only tests/tests.ts",
     "tscd": "tsc --declaration"
@@ -14,6 +17,15 @@
     "type": "git",
     "url": "git+https://github.com/Warcord/WarCord-Lib.git"
   },
+  "keywords": [
+    "wargaming",
+    "wot",
+    "worldoftanks",
+    "wotb",
+    "worldoftanksblitz",
+    "wows",
+    "worldofwarships"
+  ],
   "bugs": {
     "url": "https://github.com/Warcord/WarCord-Lib/issues"
   },
