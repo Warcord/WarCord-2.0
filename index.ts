@@ -18,7 +18,7 @@ class WarCord extends BaseClass {
     constructor(app_id: string, lang?: string) {
         super(app_id)
         this.app = { id: this.idChecker(app_id), lang: this.langChecker(lang) }
-        this.wargaming = new WargamingBase(app_id, lang)
+        this.wargaming = new WargamingBase(this.idChecker(app_id), this.langChecker(lang))
     }
 
     private idChecker(id: string): string {
@@ -40,7 +40,7 @@ class WarCord extends BaseClass {
         ]
 
         if (!langs.includes(lang)) { console.log('[WarCord] Your API Lang is not valid. (using Wargaming API)'); return 'com' }
-        if (lang = 'na') lang = 'com'
+        if (lang == 'na') { lang = 'com' }
 
         return lang
     }
