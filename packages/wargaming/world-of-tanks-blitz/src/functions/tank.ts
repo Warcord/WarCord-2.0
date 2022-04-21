@@ -10,6 +10,11 @@ class WOTBTank extends BaseClass {
         this.app = { id: app_id, lang: lang }
     }
 
+    /**
+     * @description Get the tank by ID.
+     * @param {string | number} tankID
+     * @returns {Promise<WOTBTankResolve | null>}
+     */
     public async get(tankID: string | number): Promise<WOTBTankResolve | null> {
         var data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
         if (data.status == "error") return null

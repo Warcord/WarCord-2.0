@@ -45,7 +45,7 @@ const warcord = new WarCord('your-app-id')
 
 > World of WarShips
 - [User](#user-wows)
-    - [Getting user by ID](#searching-a-user-by-id-wows)
+    - [Getting user by ID](#getting-user-by-id-wows)
     - [Searching user by name](#searching-a-user-by-name-wows)
 - [Ships](#ship-wows)
     - [Getting ships by User ID](#getting-ships-status-by-id-wows)
@@ -212,3 +212,5 @@ const user = await warcord.wargaming.wows.user.search('Name of User')
 const ships = await warcord.wargaming.wows.ship.get('ID of User')
 //this returns an Array with Ships Status.
 ```
+
+## THIS DOCS IS DEPRECATED FOR V2
