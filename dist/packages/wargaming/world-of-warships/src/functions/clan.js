@@ -21,9 +21,9 @@ class WOWSClans extends base_1.BaseClass {
         this.app = { id: app_id, lang: lang };
     }
     /**
-     * Get a clan in World of WarShips.
-     * @param clanID ID of clan.
-     * @returns {WOWSClansResolve} Clan data.
+     * @description Get a clan in World of WarShips.
+     * @param {number | string} clanID ID of clan.
+     * @returns {Promise<WOWSClansResolve | null>} Clan data.
      */
     get(clanID) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -35,9 +35,9 @@ class WOWSClans extends base_1.BaseClass {
         });
     }
     /**
-     * Get a array with clans data of respective name.
-     * @param clanNameOrTag Name or Tag of clan.
-     * @returns {ClanSearchResolve} Array with clan data.
+     * @description Get a array with clans data of respective name.
+     * @param {string} clanNameOrTag Name or Tag of clan.
+     * @returns {Promise<WOWSClansSearchResolve | null>} Array with clan data.
      */
     search(clanNameOrTag) {
         return __awaiter(this, void 0, void 0, function* () {

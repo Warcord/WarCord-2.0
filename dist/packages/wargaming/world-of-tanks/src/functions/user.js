@@ -21,9 +21,16 @@ class WorldOfTanksUser extends base_1.BaseClass {
         this.app = { id: app_id, lang: lang };
     }
     /**
-     * Search users with respective name.
-     * @param userName Name of user.
-     * @returns {Object[]} Object Array with users data.
+     * @description Search users with respective name.
+     * @param {string} userName Name of user.
+     * @returns {Promise<UserSearchResolve[] | null>} Object Array with users data.
+     * @example
+     * ...
+     * const searchingUser = await warcord.wargaming.wot.user.search('Wargaming NickName of User')
+     * //this returns an array of the users found.
+     *
+     * const user = await warcord.wargaming.wot.user.get(searchingUser[0].id)
+     * //this returns the first user data.
      */
     search(userName) {
         var _a;
@@ -35,9 +42,12 @@ class WorldOfTanksUser extends base_1.BaseClass {
         });
     }
     /**
-     * Get an user by ID.
-     * @param userID ID of user.
-     * @returns {Object} Object of user data.
+     * @description Get an user by ID.
+     * @param {number | string} userID ID of user.
+     * @returns {Promise<WOTUserResolve | null>} Object of user data.
+     * @example
+     * ...
+     * const user = await warcord.wargaming.wot.user.get('Wargaming ID of User')
      */
     get(userID) {
         var _a;
@@ -62,9 +72,12 @@ class WorldOfTanksUser extends base_1.BaseClass {
         });
     }
     /**
-     * Get the 5 best tanks of user.
-     * @param userID ID of user.
-     * @returns {Object[]} Object Array with tanks data.
+     * @description Get the 5 best tanks of user.
+     * @param {number | string} userID ID of user.
+     * @returns {Promise<WOTTopTanksResolve[] | null>} Object Array with tanks data.
+     * @example
+     * ...
+     * const topTanks = await warcord.wargaming.wot.user.topTanks('Wargaming ID of User')
      */
     topTanks(userID) {
         return __awaiter(this, void 0, void 0, function* () {

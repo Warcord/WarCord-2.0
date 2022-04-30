@@ -71,7 +71,7 @@ class WorldOfTanksClan extends BaseClass {
     }
 
     /**
-     * @description {Promise<any | null>} Get the rating of an Clan.
+     * @description Get the rating of an Clan.
      * @param {string | number} clanID ID of Clan.
      * @returns {Object} Clan rating.
      * @example
@@ -90,7 +90,7 @@ class WorldOfTanksClan extends BaseClass {
      * @param {string | number} memberID ID of Clan Member.
      * @returns {Promise<WOTMember | null>} Clan Member data.
      * @example
-     * const ratingOfClan = await warcord.wargaming.wot.clan.member('ID of Member')
+     * const memberOfClan = await warcord.wargaming.wot.clan.member('ID of Member')
      */
     public async member(memberID: string | number): Promise<WOTMember | null> {
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data

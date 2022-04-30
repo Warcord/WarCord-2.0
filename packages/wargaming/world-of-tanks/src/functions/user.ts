@@ -66,7 +66,7 @@ class WorldOfTanksUser extends BaseClass {
      * @returns {Promise<WOTTopTanksResolve[] | null>} Object Array with tanks data.
      * @example
      * ...
-     * const tank = await warcord.wargaming.wot.user.topTanks('Wargaming ID of User')
+     * const topTanks = await warcord.wargaming.wot.user.topTanks('Wargaming ID of User')
      */
     public async topTanks(userID: number | string): Promise<WOTTopTanksResolve[] | null> {
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data

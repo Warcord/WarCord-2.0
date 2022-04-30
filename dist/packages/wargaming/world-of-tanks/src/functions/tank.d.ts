@@ -7,9 +7,12 @@ declare class WorldOfTanksTank extends BaseClass {
     };
     constructor(app_id: string, lang?: string);
     /**
-     * Get a tank by ID.
-     * @param tankID ID of Tank.
-     * @returns {Object} Object with Tank Data.
+     * @description Get a tank by ID.
+     * @param {number | string} tankID ID of Tank.
+     * @returns {Promise<WOTTanksResolve | null>} Object with Tank Data.
+     * @example
+     * ...
+     * const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
      */
     get(tankID: number | string): Promise<WOTTanksResolve | null>;
 }

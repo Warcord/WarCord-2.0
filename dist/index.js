@@ -4,6 +4,10 @@ exports.WarCord = void 0;
 const base_1 = require("./packages/wargaming/build/class/base");
 const base_2 = require("./builds/class/base");
 class WarCord extends base_2.BaseClass {
+    /**
+     * @param {string} app_id The ID of your WarGaming App.
+     * @param {string} lang The followed types are an option: 'na' | 'eu' |'ru' | 'asia', the default is "na".
+     */
     constructor(app_id, lang) {
         super(app_id);
         this.app = { id: this.idChecker(app_id), lang: this.langChecker(lang) };

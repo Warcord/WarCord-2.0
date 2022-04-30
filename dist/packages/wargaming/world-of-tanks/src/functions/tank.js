@@ -21,9 +21,12 @@ class WorldOfTanksTank extends base_1.BaseClass {
         this.app = { id: app_id, lang: lang };
     }
     /**
-     * Get a tank by ID.
-     * @param tankID ID of Tank.
-     * @returns {Object} Object with Tank Data.
+     * @description Get a tank by ID.
+     * @param {number | string} tankID ID of Tank.
+     * @returns {Promise<WOTTanksResolve | null>} Object with Tank Data.
+     * @example
+     * ...
+     * const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
      */
     get(tankID) {
         return __awaiter(this, void 0, void 0, function* () {
