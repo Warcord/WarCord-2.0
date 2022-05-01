@@ -12,9 +12,9 @@ class WOWSClans extends BaseClass {
     }
 
     /**
-     * Get a clan in World of WarShips.
-     * @param clanID ID of clan.
-     * @returns {WOWSClansResolve} Clan data.
+     * @description Get a clan in World of WarShips.
+     * @param {number | string} clanID ID of clan.
+     * @returns {Promise<WOWSClansResolve | null>} Clan data.
      */
 
     public async get(clanID: number | string): Promise<WOWSClansResolve | null> {
@@ -25,9 +25,9 @@ class WOWSClans extends BaseClass {
     }
 
     /**
-     * Get a array with clans data of respective name.
-     * @param clanNameOrTag Name or Tag of clan.
-     * @returns {ClanSearchResolve} Array with clan data.
+     * @description Get a array with clans data of respective name.
+     * @param {string} clanNameOrTag Name or Tag of clan.
+     * @returns {Promise<WOWSClansSearchResolve | null>} Array with clan data.
      */
     public async search(clanNameOrTag: string): Promise<WOWSClansSearchResolve | null> {
         let data = await (await axios.get(`https://api.worldofwarships.${this.app.lang}/wows/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
