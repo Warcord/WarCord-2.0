@@ -60,7 +60,7 @@ const warcord = new WarCord('your-app-id')
 In case you want to use the lib to look up users in the Wargaming API, use:
 ```js
 ...
-const user = await warcord.wargaming.wot.user.get('Wargaming ID of User')
+const user = await warcord.wg.wot.user.get('Wargaming ID of User')
 //this returns user data.
 ```
 
@@ -69,10 +69,10 @@ const user = await warcord.wargaming.wot.user.get('Wargaming ID of User')
 We don't always have the user ID in our hands, so we use the search method, which returns a user's information, such as ID and NickName.
 ```js
 ...
-const searchingUser = await warcord.wargaming.wot.user.search('Wargaming NickName of User')
+const searchingUser = await warcord.wg.wot.user.search('Wargaming NickName of User')
 //this returns an array of the users found.
 
-const user = await warcord.wargaming.wot.user.get(searchingUser[0].id)
+const user = await warcord.wg.wot.user.get(searchingUser[0].id)
 //this returns the first user data.
 ```
 
@@ -81,7 +81,7 @@ const user = await warcord.wargaming.wot.user.get(searchingUser[0].id)
 If you are interested in seeing a user's 5 best tanks, use this:
 ```js
 ...
-const tank = await warcord.wargaming.wot.user.topTanks('Wargaming ID of User')
+const tank = await warcord.wg.wot.user.topTanks('Wargaming ID of User')
 //this returns an Object Array with the 5 best tanks of a user.
 ```
 
@@ -92,7 +92,7 @@ const tank = await warcord.wargaming.wot.user.topTanks('Wargaming ID of User')
 If you need get a clan by ID, use this:
 ```js
 ...
-const clan = await warcord.wargaming.wot.clan.get('ID of Clan')
+const clan = await warcord.wg.wot.clan.get('ID of Clan')
 //this returns clan data.
 ```
 
@@ -101,17 +101,17 @@ const clan = await warcord.wargaming.wot.clan.get('ID of Clan')
 You don't have the ID of clan? Use this to get!
 ```js
 ...
-const searchingClan = await warcord.wargaming.wot.clan.search('Name or Tag of Clan')
+const searchingClan = await warcord.wg.wot.clan.search('Name or Tag of Clan')
 //this returns an array of the clans found
 
-const clan = await warcord.wargaming.wot.clan.get(searchingClan[0].clan_id)
+const clan = await warcord.wg.wot.clan.get(searchingClan[0].clan_id)
 //this returns the first clan data.
 ```
 
 ### Rating of clan Wot
 ```js
 ...
-const ratingOfClan = await warcord.wargaming.wot.clan.rating('ID of Clan')
+const ratingOfClan = await warcord.wg.wot.clan.rating('ID of Clan')
 //this returns an Object with rating of searched clan.
 ```
 
@@ -120,7 +120,7 @@ const ratingOfClan = await warcord.wargaming.wot.clan.rating('ID of Clan')
 ### Getting a tank by ID Wot
 ```js
 ...
-const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
+const tank = await warcord.wg.blitz.tank.get('ID of Tank')
 //this returns an Object with tank data.
 ```
 
@@ -130,7 +130,7 @@ const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
 
 ```js
 ...
-const user = await warcord.wargaming.blitz.user.get('Wargaming ID of User')
+const user = await warcord.wg.blitz.user.get('Wargaming ID of User')
 //this returns user data.
 ```
 
@@ -139,10 +139,10 @@ const user = await warcord.wargaming.blitz.user.get('Wargaming ID of User')
 We don't always have the user ID in our hands, so we use the search method, which returns a user's information, such as ID and NickName.
 ```js
 ...
-const searchingUser = await warcord.wargaming.blitz.user.search('Wargaming NickName of User')
+const searchingUser = await warcord.wg.blitz.user.search('Wargaming NickName of User')
 //this returns an array of the users found.
 
-const user = await warcord.wargaming.blitz.user.get(searchingUser[0].id)
+const user = await warcord.wg.blitz.user.get(searchingUser[0].id)
 //this returns the first user data.
 ```
 
@@ -151,7 +151,7 @@ const user = await warcord.wargaming.blitz.user.get(searchingUser[0].id)
 If you are interested in seeing a user's 5 best tanks, use this:
 ```js
 ...
-const tank = await warcord.wargaming.blitz.user.topTanks('Wargaming ID of User')
+const tank = await warcord.wg.blitz.user.topTanks('Wargaming ID of User')
 //this returns an Object Array with the 5 best tanks of a user.
 ```
 
@@ -162,7 +162,7 @@ const tank = await warcord.wargaming.blitz.user.topTanks('Wargaming ID of User')
 If you need get a clan by ID, use this:
 ```js
 ...
-const clan = await warcord.wargaming.blitz.clan.get('ID of Clan')
+const clan = await warcord.wg.blitz.clan.get('ID of Clan')
 //this returns clan data.
 ```
 
@@ -171,10 +171,10 @@ const clan = await warcord.wargaming.blitz.clan.get('ID of Clan')
 You don't have the ID of clan? Use this to get!
 ```js
 ...
-const searchingClan = await warcord.wargaming.blitz.clan.search('Name or Tag of Clan')
+const searchingClan = await warcord.wg.blitz.clan.search('Name or Tag of Clan')
 //this returns an array of the clans found
 
-const clan = await warcord.wargaming.blitz.clan.get(searchingClan[0].clan_id)
+const clan = await warcord.wg.blitz.clan.get(searchingClan[0].clan_id)
 //this returns the first clan data.
 ```
 
@@ -183,7 +183,7 @@ const clan = await warcord.wargaming.blitz.clan.get(searchingClan[0].clan_id)
 ### Getting a tank by ID Wotb
 ```js
 ...
-const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
+const tank = await warcord.wg.blitz.tank.get('ID of Tank')
 //this returns an Object with tank data.
 ```
 # World-of-Warships
@@ -195,20 +195,20 @@ const tank = await warcord.wargaming.blitz.tank.get('ID of Tank')
 ### Getting user by ID WOWS
 ```js
 ...
-const user = await warcord.wargaming.wows.user.get('ID of User')
+const user = await warcord.wg.wows.user.get('ID of User')
 //this returns user data.
 ```
 
 ### Searching user by name WOWS
 ```js
 ...
-const user = await warcord.wargaming.wows.user.search('Name of User')
+const user = await warcord.wg.wows.user.search('Name of User')
 //this returns user ID and Name.
 ```
 
 ### Getting ships status by User ID
 ```js
 ...
-const ships = await warcord.wargaming.wows.ship.get('ID of User')
+const ships = await warcord.wg.wows.ship.get('ID of User')
 //this returns an Array with Ships Status.
 ```

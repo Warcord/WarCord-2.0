@@ -13,12 +13,16 @@ class WarCord extends BaseClass {
         id: string,
         lang?: string
     }
-    wargaming: WargamingBase
+    wg: WargamingBase
 
+    /**
+     * @param {string} app_id The ID of your WarGaming App.
+     * @param {string} [lang=na] The followed types are an option: 'na' | 'eu' |'ru' | 'asia'.
+     */
     constructor(app_id: string, lang?: string) {
         super(app_id)
         this.app = { id: this.idChecker(app_id), lang: this.langChecker(lang) }
-        this.wargaming = new WargamingBase(this.idChecker(app_id), this.langChecker(lang))
+        this.wg = new WargamingBase(this.idChecker(app_id), this.langChecker(lang))
     }
 
     private idChecker(id: string): string {
