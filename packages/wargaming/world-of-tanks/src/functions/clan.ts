@@ -3,13 +3,14 @@ import { BaseClass } from '../../../../../builds/class/base'
 import { WOTClanResolve } from '../interfaces/clan/clan-resolve'
 import { WOTClanSearchResolve } from '../interfaces/clan/search-resolve'
 import { WOTMember } from '../interfaces/clan/member'
+import { AllRealms } from '../../../../..'
 
 class WorldOfTanksClan extends BaseClass {
 
-    app: { id: string, lang?: string }
-    constructor(app_id: string, lang?: string) {
+    app: { id: string, realm?: string }
+    constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: app_id, lang: lang }
+        this.app = { id: app_id, realm: realm }
     }
 
     /**
@@ -22,7 +23,7 @@ class WorldOfTanksClan extends BaseClass {
      */
 
     public async get(clanID: number | string): Promise<WOTClanResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
         if (data.status == "error") return null
         data = data.data[clanID]
         return {
@@ -63,7 +64,7 @@ class WorldOfTanksClan extends BaseClass {
      * //this returns the first clan data.
      */
     public async search(clanNameOrTag: string): Promise<WOTClanSearchResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
         if (data.status == "error") return null
         data = data.data
         if (!data || data.length <= 0) return null
@@ -79,7 +80,7 @@ class WorldOfTanksClan extends BaseClass {
      * const ratingOfClan = await <Warcord>.wg.wot.clan.rating('ID of Clan')
      */
     public async rating(clanID: string | number): Promise<any | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data
         if (data.status == "error") return null
         data = data.data[clanID]
         return data
@@ -93,7 +94,7 @@ class WorldOfTanksClan extends BaseClass {
      * const memberOfClan = await <Warcord>.wg.wot.clan.member('ID of Member')
      */
     public async member(memberID: string | number): Promise<WOTMember | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data
         if (data.status == "error") return null
 
         return data.data[memberID]

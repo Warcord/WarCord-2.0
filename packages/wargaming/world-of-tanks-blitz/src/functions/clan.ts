@@ -2,13 +2,14 @@ import { BaseClass } from "../../../../../builds/class/base";
 import axios from "axios";
 import { WOTBClanResolve } from '../interfaces/clan/clan-resolve'
 import { ClanSearchBlitz } from "../interfaces/clan/search";
+import { AllRealms } from "../../../../..";
 
 class WOTBClan extends BaseClass {
 
-    app: { id: string, lang?: string }
-    constructor(app_id: string, lang?: string) {
+    app: { id: string, realm?: AllRealms }
+    constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: app_id, lang: lang }
+        this.app = { id: app_id, realm: realm }
     }
 
     /**
@@ -21,7 +22,7 @@ class WOTBClan extends BaseClass {
      */
 
     public async get(clanID: string | number): Promise<WOTBClanResolve | null> {
-        let data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
+        let data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
         if (data.status == "error") return null
         return data.data[clanID]
     }
@@ -39,7 +40,7 @@ class WOTBClan extends BaseClass {
      * //this returns the first clan data.
      */
     public async search(clanNameOrTag: string): Promise<ClanSearchBlitz[] | null> {
-        let data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
+        let data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
 
         if (data.status == "error" || data.data.length <= 0) return null
         return data.data

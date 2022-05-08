@@ -2,23 +2,28 @@ import { WOTTanksResolve } from '../interfaces/tank/tank-resolve'
 import axios from 'axios'
 import { BaseClass } from '../../../../../builds/class/base'
 import { warn } from 'console'
+import { AllRealms } from '../../../../..'
+
+export type WOTLangs = | "cs" | "de" | "en" | "es" | "fr" | "pl" | "ru" | "th" | "zh-tw" | "tr" | "zh-cn" | "ko" | "vi"
+export type WOTNations = | 'japan' | 'germany' | 'sweden' | 'poland' | 'czech' | 'usa' | 'france' | 'ussr' | 'uk' | 'china' | 'italy'
+export type WOTTankTypes = | "heavyTank" | "AT-SPG" | "mediumTank" | "lightTank" | "SPG"
 
 class WorldOfTanksTank extends BaseClass {
 
-    app: { id: string, lang?: string }
-    constructor(app_id: string, lang?: string) {
+    app: { id: string, realm?: AllRealms }
+    constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: app_id, lang: lang }
+        this.app = { id: app_id, realm: realm }
     }
 
     /**
      * @description Get all tanks of parameters.
      * @param {?string} type type of tank.
-     * @param {?string} nation The nation of tank.
+     * @param {?WOTNations} nation The nation of tank.
      * @param {?string} tier The tier of tank.
      * @param {?Object} options - The options object.
      * @property {?number} [options.limit=100] Limit of returned data.
-     * @property {?string} [options.lang=en] The language of Texts.
+     * @property {?WOTLangs} [options.lang=en] The language of Texts.
      * @returns {Promise(<WOTTanksResolve | null>)} Returns all tanks finded.
      * @exemple
      * ...
@@ -26,7 +31,7 @@ class WorldOfTanksTank extends BaseClass {
      * const getTank = await <Warcord>.wg.tank.find('heavyTank')
      */
 
-    public async find(type?: string, nation?: string, tier?: string, options?: { limit?: number, lang?: string }): Promise<WOTTanksResolve[] | null> {
+    public async find(type?: WOTTankTypes, nation?: WOTNations, tier?: string | number, options?: { limit?: number, lang?: WOTLangs }): Promise<WOTTanksResolve[] | null> {
 
         if (!type && !nation && !tier) throw Error("[WARCORD] It's necessary an tankName to use this method.")
         let option = '';
@@ -58,7 +63,7 @@ class WorldOfTanksTank extends BaseClass {
         nation ? option = option + '&nation=' + nation : ''
         tier ? option = option + '&tier=' + tier : ''
 
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data
         if (data.status == "error") return null
         return data.data
     }
@@ -73,7 +78,7 @@ class WorldOfTanksTank extends BaseClass {
      */
     
     public async get(tankID: number | string): Promise<WOTTanksResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
         if (data.status == "error") return null
         data = data.data[tankID]
 
