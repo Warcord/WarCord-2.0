@@ -28,6 +28,7 @@ class WOWSShip extends BaseClass {
     }
 
     /**
+     * @description Get a ship based on params.
      * @param {Object} ops
      * @property {?string} ops.nation The nation of ship.
      * @property {?string} ops.string The type of ship.
