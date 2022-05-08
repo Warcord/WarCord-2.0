@@ -8,15 +8,15 @@ declare class WOWSClans extends BaseClass {
     };
     constructor(app_id: string, lang?: string);
     /**
-     * Get a clan in World of WarShips.
-     * @param clanID ID of clan.
-     * @returns {WOWSClansResolve} Clan data.
+     * @description Get a clan in World of WarShips.
+     * @param {number | string} clanID ID of clan.
+     * @returns {Promise<WOWSClansResolve | null>} Clan data.
      */
     get(clanID: number | string): Promise<WOWSClansResolve | null>;
     /**
-     * Get a array with clans data of respective name.
-     * @param clanNameOrTag Name or Tag of clan.
-     * @returns {ClanSearchResolve} Array with clan data.
+     * @description Get a array with clans data of respective name.
+     * @param {string} clanNameOrTag Name or Tag of clan.
+     * @returns {Promise<WOWSClansSearchResolve | null>} Array with clan data.
      */
     search(clanNameOrTag: string): Promise<WOWSClansSearchResolve | null>;
 }

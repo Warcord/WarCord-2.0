@@ -18,7 +18,7 @@ class WorldOfTanksClan extends BaseClass {
      * @returns {Promise<WOTClanResolve | null>} Clan data.
      * @example
      * ...
-     * const clan = await warcord.wg.wot.clan.get('ID of Clan')
+     * const clan = await <Warcord>.wg.wot.clan.get('ID of Clan')
      */
 
     public async get(clanID: number | string): Promise<WOTClanResolve | null> {
@@ -56,10 +56,10 @@ class WorldOfTanksClan extends BaseClass {
      * @returns {Promise<WOTClanSearchResolve[] | null>} Array with clan data.
      * @example
      * ...
-     * const searchingClan = await warcord.wg.wot.clan.search('Name or Tag of Clan')
+     * const searchingClan = await <Warcord>.wg.wot.clan.search('Name or Tag of Clan')
      * //this returns an array of the clans found.
      *
-     * const clan = await warcord.wg.wot.clan.get(searchingClan[0].clan_id)
+     * const clan = await <Warcord>.wg.wot.clan.get(searchingClan[0].clan_id)
      * //this returns the first clan data.
      */
     public async search(clanNameOrTag: string): Promise<WOTClanSearchResolve | null> {
@@ -76,7 +76,7 @@ class WorldOfTanksClan extends BaseClass {
      * @returns {Object} Clan rating.
      * @example
      * ...
-     * const ratingOfClan = await warcord.wg.wot.clan.rating('ID of Clan')
+     * const ratingOfClan = await <Warcord>.wg.wot.clan.rating('ID of Clan')
      */
     public async rating(clanID: string | number): Promise<any | null> {
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data
@@ -90,7 +90,7 @@ class WorldOfTanksClan extends BaseClass {
      * @param {string | number} memberID ID of Clan Member.
      * @returns {Promise<WOTMember | null>} Clan Member data.
      * @example
-     * const memberOfClan = await warcord.wg.wot.clan.member('ID of Member')
+     * const memberOfClan = await <Warcord>.wg.wot.clan.member('ID of Member')
      */
     public async member(memberID: string | number): Promise<WOTMember | null> {
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data

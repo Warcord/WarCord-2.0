@@ -11,7 +11,11 @@ declare class WarCord extends BaseClass {
         id: string;
         lang?: string;
     };
-    wargaming: WargamingBase;
+    wg: WargamingBase;
+    /**
+     * @param {string} app_id The ID of your WarGaming App.
+     * @param {string} [lang=na] The followed types are an option: 'na' | 'eu' |'ru' | 'asia'.
+     */
     constructor(app_id: string, lang?: string);
     private idChecker;
     private langChecker;

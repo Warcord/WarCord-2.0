@@ -6,6 +6,11 @@ declare class WOTBTank extends BaseClass {
         lang?: string;
     };
     constructor(app_id: string, lang?: string);
+    /**
+     * @description Get the tank by ID.
+     * @param {string | number} tankID
+     * @returns {Promise<WOTBTankResolve | null>}
+     */
     get(tankID: string | number): Promise<WOTBTankResolve | null>;
 }
 export { WOTBTank };

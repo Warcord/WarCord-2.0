@@ -1,6 +1,7 @@
 import { WOTTanksResolve } from '../interfaces/tank/tank-resolve'
 import axios from 'axios'
 import { BaseClass } from '../../../../../builds/class/base'
+import { warn } from 'console'
 
 class WorldOfTanksTank extends BaseClass {
 
@@ -17,35 +18,50 @@ class WorldOfTanksTank extends BaseClass {
      * @param {?string} tier The tier of tank.
      * @param {?Object} options - The options object.
      * @property {?number} [options.limit=100] Limit of returned data.
+     * @property {?string} [options.lang=en] The language of Texts.
      * @returns {Promise(<WOTTanksResolve | null>)} Returns all tanks finded.
      * @exemple
      * ...
      * 
-     * const getTank = await warcord.wg.tank.find('heavyTank')
+     * const getTank = await <Warcord>.wg.tank.find('heavyTank')
      */
 
-    public async find(type?: string, nation?: string, tier?: string, options?: { limit?: number }): Promise<WOTTanksResolve[] | null> {
+    public async find(type?: string, nation?: string, tier?: string, options?: { limit?: number, lang?: string }): Promise<WOTTanksResolve[] | null> {
 
         if (!type && !nation && !tier) throw Error("[WARCORD] It's necessary an tankName to use this method.")
+        let option = '';
 
         const types = ["heavyTank", "AT-SPG", "mediumTank", "lightTank", "SPG"]
-        if (!types.includes((<string>type))) throw Error("This type of tank does not exist.");
+        if (!types.includes((<string>type))) throw Error("[WARCORD] This type of tank does not exist.");
 
-        if (options && (<number>options.limit) > 100 || options && (<number>options.limit) <= 0) {
-            options.limit = 100
+        if (options && options.limit) {
+            
+            if ((<number>options.limit) > 100 || (<number>options.limit) <= 0) {
+                options.limit = 100
+            }
+
+            option = option + '&limit=' + options.limit
         }
 
-        let option = '';
-        options?.limit ? '&' + options?.limit : ''
-        type ? option = '&' + type : ''
-        nation ? option = '&' + nation : ''
-        tier ? option = '&' + tier : ''
-        option + type + nation + tier
+        const langs = [ "cs", "de", "en", "es", "fr", "pl", "ru", "th", "zh-tw", "tr", "zh-cn", "ko", "vi" ]
+        if (options && options.lang) {
+
+            if (!langs.includes(options.lang)) {
+                options.lang = "en"
+                warn("[WARCORD WARNING] This language is not supported. Using the default language...")
+            }
+
+            option = option + '&language=' + options.lang
+        }
+
+        type ? option = option + '&type=' + type : ''
+        nation ? option = option + '&nation=' + nation : ''
+        tier ? option = option + '&tier=' + tier : ''
 
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data
         if (data.status == "error") return null
         return data.data
-    } 
+    }
     
     /**
      * @description Get a tank by ID.
@@ -53,7 +69,7 @@ class WorldOfTanksTank extends BaseClass {
      * @returns {Promise<WOTTanksResolve | null>} Object with Tank Data.
      * @example
      * ...
-     * const tank = await warcord.wg.blitz.tank.get('ID of Tank')
+     * const tank = await .wg.blitz.tank.get('ID of Tank')
      */
     
     public async get(tankID: number | string): Promise<WOTTanksResolve | null> {

@@ -18,7 +18,7 @@ class WOTBUser extends BaseClass {
      * @returns {Promise<WOTBUserResolve | null>}
      * @example
      * ...
-     * const user = await warcord.wg.blitz.user.get('Wargaming ID of User')
+     * const user = await <Warcord>.wg.blitz.user.get('Wargaming ID of User')
      */
     public async get(userID: string | number): Promise<WOTBUserResolve | null> {
         let data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/account/info/?application_id=${this.app.id}&account_id=${userID}`)).data
@@ -43,10 +43,10 @@ class WOTBUser extends BaseClass {
      * @returns {Promise<UserSearchResolve | null>}
      * @example
      * ...
-     * const searchingUser = await warcord.wg.blitz.user.search('Wargaming NickName of User')
+     * const searchingUser = await <Warcord>.wg.blitz.user.search('Wargaming NickName of User')
      * //this returns an array of the users found.
      *
-     * const user = await warcord.wg.blitz.user.get(searchingUser[0].id)
+     * const user = await <Warcord>.wg.blitz.user.get(searchingUser[0].id)
      * //this returns the first user data.
      */
     public async search(userName: string): Promise<UserSearchResolve | null> {
@@ -61,7 +61,7 @@ class WOTBUser extends BaseClass {
      * @returns {Promise<WOTBTankTop | null>}
      * @example
      * ...
-     * const tank = await warcord.wg.blitz.user.topTanks('Wargaming ID of User')
+     * const tank = await <Warcord>.wg.blitz.user.topTanks('Wargaming ID of User')
      */
     public async topTanks(userID: string | number): Promise<WOTBTankTop | null> {
 
