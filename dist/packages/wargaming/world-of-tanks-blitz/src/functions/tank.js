@@ -20,6 +20,11 @@ class WOTBTank extends base_1.BaseClass {
         super(app_id);
         this.app = { id: app_id, lang: lang };
     }
+    /**
+     * @description Get the tank by ID.
+     * @param {string | number} tankID
+     * @returns {Promise<WOTBTankResolve | null>}
+     */
     get(tankID) {
         return __awaiter(this, void 0, void 0, function* () {
             var data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;

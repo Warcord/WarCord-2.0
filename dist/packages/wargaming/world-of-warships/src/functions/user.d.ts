@@ -8,15 +8,15 @@ declare class WOWSUser extends BaseClass {
     };
     constructor(app_id: string, lang?: string);
     /**
-     * Search users with respective name.
-     * @param userName Name of user.
-     * @returns {Object[]} Object Array with users data.
+     * @description Search users with respective name.
+     * @param {string} userName Name of user.
+     * @returns {Promise<UserSearchResolve[] | null>} Object Array with users data.
      */
     search(userName: string): Promise<UserSearchResolve[] | null>;
     /**
-     * Get an user by ID.
-     * @param userID ID of user.
-     * @returns {Object} Object of user data.
+     * @description Get an user by ID.
+     * @param {number | string} userID ID of user.
+     * @returns {Promise<WOWSUserResolve | null>} Object of user data.
      */
     get(userID: number | string): Promise<WOWSUserResolve | null>;
 }

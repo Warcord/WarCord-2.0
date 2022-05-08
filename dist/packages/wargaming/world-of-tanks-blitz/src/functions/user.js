@@ -20,6 +20,14 @@ class WOTBUser extends base_1.BaseClass {
         super(app_id);
         this.app = { id: app_id, lang: lang };
     }
+    /**
+     * @description Get the user data by ID.
+     * @param {string | number} userID
+     * @returns {Promise<WOTBUserResolve | null>}
+     * @example
+     * ...
+     * const user = await <Warcord>.wg.blitz.user.get('Wargaming ID of User')
+     */
     get(userID) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/account/info/?application_id=${this.app.id}&account_id=${userID}`)).data;
@@ -38,6 +46,18 @@ class WOTBUser extends base_1.BaseClass {
             };
         });
     }
+    /**
+     * @description Get all users with the putted name.
+     * @param {string} userName
+     * @returns {Promise<UserSearchResolve | null>}
+     * @example
+     * ...
+     * const searchingUser = await <Warcord>.wg.blitz.user.search('Wargaming NickName of User')
+     * //this returns an array of the users found.
+     *
+     * const user = await <Warcord>.wg.blitz.user.get(searchingUser[0].id)
+     * //this returns the first user data.
+     */
     search(userName) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/account/list/?application_id=${this.app.id}&search=${userName}`)).data;
@@ -46,6 +66,14 @@ class WOTBUser extends base_1.BaseClass {
             return data.data;
         });
     }
+    /**
+     * @description Get the best 5 tanks of an user.
+     * @param {string | number} userID
+     * @returns {Promise<WOTBTankTop | null>}
+     * @example
+     * ...
+     * const tank = await <Warcord>.wg.blitz.user.topTanks('Wargaming ID of User')
+     */
     topTanks(userID) {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.lang}/wotb/tanks/stats/?application_id=${this.app.id}&account_id=${userID}`)).data;

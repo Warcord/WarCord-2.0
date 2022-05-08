@@ -15,15 +15,64 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WorldOfTanksTank = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
+const console_1 = require("console");
 class WorldOfTanksTank extends base_1.BaseClass {
     constructor(app_id, lang) {
         super(app_id);
         this.app = { id: app_id, lang: lang };
     }
     /**
-     * Get a tank by ID.
-     * @param tankID ID of Tank.
-     * @returns {Object} Object with Tank Data.
+     * @description Get all tanks of parameters.
+     * @param {?string} type type of tank.
+     * @param {?string} nation The nation of tank.
+     * @param {?string} tier The tier of tank.
+     * @param {?Object} options - The options object.
+     * @property {?number} [options.limit=100] Limit of returned data.
+     * @property {?string} [options.lang=en] The language of Texts.
+     * @returns {Promise(<WOTTanksResolve | null>)} Returns all tanks finded.
+     * @exemple
+     * ...
+     *
+     * const getTank = await <Warcord>.wg.tank.find('heavyTank')
+     */
+    find(type, nation, tier, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!type && !nation && !tier)
+                throw Error("[WARCORD] It's necessary an tankName to use this method.");
+            let option = '';
+            const types = ["heavyTank", "AT-SPG", "mediumTank", "lightTank", "SPG"];
+            if (!types.includes(type))
+                throw Error("[WARCORD] This type of tank does not exist.");
+            if (options && options.limit) {
+                if (options.limit > 100 || options.limit <= 0) {
+                    options.limit = 100;
+                }
+                option = option + '&limit=' + options.limit;
+            }
+            const langs = ["cs", "de", "en", "es", "fr", "pl", "ru", "th", "zh-tw", "tr", "zh-cn", "ko", "vi"];
+            if (options && options.lang) {
+                if (!langs.includes(options.lang)) {
+                    options.lang = "en";
+                    (0, console_1.warn)("[WARCORD WARNING] This language is not supported. Using the default language...");
+                }
+                option = option + '&language=' + options.lang;
+            }
+            type ? option = option + '&type=' + type : '';
+            nation ? option = option + '&nation=' + nation : '';
+            tier ? option = option + '&tier=' + tier : '';
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data;
+            if (data.status == "error")
+                return null;
+            return data.data;
+        });
+    }
+    /**
+     * @description Get a tank by ID.
+     * @param {number | string} tankID ID of Tank.
+     * @returns {Promise<WOTTanksResolve | null>} Object with Tank Data.
+     * @example
+     * ...
+     * const tank = await .wg.blitz.tank.get('ID of Tank')
      */
     get(tankID) {
         return __awaiter(this, void 0, void 0, function* () {
