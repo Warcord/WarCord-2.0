@@ -8,7 +8,7 @@ export type WOTLangs = | "cs" | "de" | "en" | "es" | "fr" | "pl" | "ru" | "th" |
 export type WOTNations = | 'japan' | 'germany' | 'sweden' | 'poland' | 'czech' | 'usa' | 'france' | 'ussr' | 'uk' | 'china' | 'italy'
 export type WOTTankTypes = | "heavyTank" | "AT-SPG" | "mediumTank" | "lightTank" | "SPG"
 
-class WorldOfTanksTank extends BaseClass {
+class WOTTank extends BaseClass {
 
     app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
@@ -112,4 +112,4 @@ class WorldOfTanksTank extends BaseClass {
     }
 }
 
-export { WorldOfTanksTank }
+export { WOTTank }

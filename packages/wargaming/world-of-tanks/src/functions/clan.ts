@@ -5,7 +5,7 @@ import { WOTClanSearchResolve } from '../interfaces/clan/search-resolve'
 import { WOTMember } from '../interfaces/clan/member'
 import { AllRealms } from '../../../../..'
 
-class WorldOfTanksClan extends BaseClass {
+class WOTClan extends BaseClass {
 
     app: { id: string, realm?: string }
     constructor(app_id: string, realm?: AllRealms) {
@@ -101,4 +101,4 @@ class WorldOfTanksClan extends BaseClass {
     }
 }
 
-export { WorldOfTanksClan }
+export { WOTClan }

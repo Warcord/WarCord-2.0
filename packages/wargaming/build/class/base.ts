@@ -1,9 +1,9 @@
 import { BaseClass } from '../../../../builds/class/base'
 import { WargamingApp } from '../interfaces/app'
 
-import { WorldOfTanksUser } from '../../world-of-tanks/src/functions/user'
-import { WorldOfTanksTank } from '../../world-of-tanks/src/functions/tank'
-import { WorldOfTanksClan } from '../../world-of-tanks/src/functions/clan'
+import { WOTUser } from '../../world-of-tanks/src/functions/user'
+import { WOTTank } from '../../world-of-tanks/src/functions/tank'
+import { WOTClan } from '../../world-of-tanks/src/functions/clan'
 
 import { WOTBUser } from '../../world-of-tanks-blitz/src/functions/user'
 import { WOTBTank } from '../../world-of-tanks-blitz/src/functions/tank'
@@ -20,9 +20,9 @@ class WargamingBase extends BaseClass implements WargamingApp {
         realm?: AllRealms
     }
     wot: {
-        user: WorldOfTanksUser,
-        tank: WorldOfTanksTank,
-        clan: WorldOfTanksClan
+        user: WOTUser,
+        tank: WOTTank,
+        clan: WOTClan
     }
     blitz: {
         user: WOTBUser,
@@ -39,9 +39,9 @@ class WargamingBase extends BaseClass implements WargamingApp {
         super(app_id)
         this.app = { id: app_id, realm: realm }
         this.wot = {
-            user: new WorldOfTanksUser(app_id, realm),
-            tank: new WorldOfTanksTank(app_id, realm),
-            clan: new WorldOfTanksClan(app_id, realm)
+            user: new WOTUser(app_id, realm),
+            tank: new WOTTank(app_id, realm),
+            clan: new WOTClan(app_id, realm)
         }
         this.blitz = {
             user: new WOTBUser(app_id, realm),

@@ -5,7 +5,7 @@ import { WOTTopTanksResolve } from '../interfaces/tank/top-tanks'
 import { BaseClass } from '../../../../../builds/class/base'
 import { AllRealms } from '../../../../..'
 
-class WorldOfTanksUser extends BaseClass {
+class WOTUser extends BaseClass {
 
     app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
@@ -78,4 +78,4 @@ class WorldOfTanksUser extends BaseClass {
     }
 }
 
-export { WorldOfTanksUser }
+export { WOTUser }
