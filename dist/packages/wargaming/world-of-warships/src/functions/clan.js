@@ -16,9 +16,9 @@ exports.WOWSClans = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
 class WOWSClans extends base_1.BaseClass {
-    constructor(app_id, lang) {
+    constructor(app_id, realm) {
         super(app_id);
-        this.app = { id: app_id, lang: lang };
+        this.app = { id: app_id, realm: realm };
     }
     /**
      * @description Get a clan in World of WarShips.
@@ -27,7 +27,7 @@ class WOWSClans extends base_1.BaseClass {
      */
     get(clanID) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data[clanID];
@@ -41,7 +41,7 @@ class WOWSClans extends base_1.BaseClass {
      */
     search(clanNameOrTag) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data;

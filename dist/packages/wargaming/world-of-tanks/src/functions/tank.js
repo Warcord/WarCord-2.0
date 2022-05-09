@@ -12,23 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WorldOfTanksTank = void 0;
+exports.WOTTank = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
 const console_1 = require("console");
-class WorldOfTanksTank extends base_1.BaseClass {
-    constructor(app_id, lang) {
+class WOTTank extends base_1.BaseClass {
+    constructor(app_id, realm) {
         super(app_id);
-        this.app = { id: app_id, lang: lang };
+        this.app = { id: app_id, realm: realm };
     }
     /**
      * @description Get all tanks of parameters.
      * @param {?string} type type of tank.
-     * @param {?string} nation The nation of tank.
+     * @param {?WOTNations} nation The nation of tank.
      * @param {?string} tier The tier of tank.
      * @param {?Object} options - The options object.
      * @property {?number} [options.limit=100] Limit of returned data.
-     * @property {?string} [options.lang=en] The language of Texts.
+     * @property {?WOTLangs} [options.lang=en] The language of Texts.
      * @returns {Promise(<WOTTanksResolve | null>)} Returns all tanks finded.
      * @exemple
      * ...
@@ -60,7 +60,7 @@ class WorldOfTanksTank extends base_1.BaseClass {
             type ? option = option + '&type=' + type : '';
             nation ? option = option + '&nation=' + nation : '';
             tier ? option = option + '&tier=' + tier : '';
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data;
             if (data.status == "error")
                 return null;
             return data.data;
@@ -76,7 +76,7 @@ class WorldOfTanksTank extends base_1.BaseClass {
      */
     get(tankID) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data[tankID];
@@ -110,4 +110,4 @@ class WorldOfTanksTank extends base_1.BaseClass {
         });
     }
 }
-exports.WorldOfTanksTank = WorldOfTanksTank;
+exports.WOTTank = WOTTank;

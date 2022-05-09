@@ -1,12 +1,13 @@
 import { UserSearchResolve } from '../../../build/interfaces/search-resolve';
 import { BaseClass } from '../../../../../builds/class/base';
 import { WOWSUserResolve } from '../interfaces/user/result';
+import { AllRealms } from '../../../../..';
 declare class WOWSUser extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: AllRealms;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Search users with respective name.
      * @param {string} userName Name of user.

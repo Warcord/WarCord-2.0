@@ -2,12 +2,13 @@ import { BaseClass } from '../../../../../builds/class/base';
 import { WOTClanResolve } from '../interfaces/clan/clan-resolve';
 import { WOTClanSearchResolve } from '../interfaces/clan/search-resolve';
 import { WOTMember } from '../interfaces/clan/member';
-declare class WorldOfTanksClan extends BaseClass {
+import { AllRealms } from '../../../../..';
+declare class WOTClan extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: string;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Get a clan in World of Tanks.
      * @param {string} clanID ID of clan.
@@ -48,4 +49,4 @@ declare class WorldOfTanksClan extends BaseClass {
      */
     member(memberID: string | number): Promise<WOTMember | null>;
 }
-export { WorldOfTanksClan };
+export { WOTClan };

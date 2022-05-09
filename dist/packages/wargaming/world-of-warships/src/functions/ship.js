@@ -17,9 +17,9 @@ const base_1 = require("../../../../../builds/class/base");
 const axios_1 = __importDefault(require("axios"));
 const console_1 = require("console");
 class WOWSShip extends base_1.BaseClass {
-    constructor(app_id, lang) {
+    constructor(app_id, realm) {
         super(app_id);
-        this.app = { id: app_id, lang: lang };
+        this.app = { id: app_id, realm: realm };
     }
     /**
      * @description Get the ships status of an user.
@@ -31,13 +31,14 @@ class WOWSShip extends base_1.BaseClass {
      */
     get(userID) {
         return __awaiter(this, void 0, void 0, function* () {
-            var data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data;
+            var data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data;
             if (data.status == "error")
                 return null;
             return data.data[userID];
         });
     }
     /**
+     * @description Get a ship based on params.
      * @param {Object} ops
      * @property {?string} ops.nation The nation of ship.
      * @property {?string} ops.string The type of ship.
@@ -74,7 +75,7 @@ class WOWSShip extends base_1.BaseClass {
             }
             nation ? option = option + '&nation=' + nation : '';
             type ? option = option + '&type=' + type : '';
-            var data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data;
+            var data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data;
             if (data.status == "error")
                 return null;
             return data.data;

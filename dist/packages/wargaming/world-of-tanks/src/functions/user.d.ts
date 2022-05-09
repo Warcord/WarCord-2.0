@@ -2,12 +2,13 @@ import { WOTUserResolve } from '../interfaces/user/user-return';
 import { UserSearchResolve } from '../../../build/interfaces/search-resolve';
 import { WOTTopTanksResolve } from '../interfaces/tank/top-tanks';
 import { BaseClass } from '../../../../../builds/class/base';
-declare class WorldOfTanksUser extends BaseClass {
+import { AllRealms } from '../../../../..';
+declare class WOTUser extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: AllRealms;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Search users with respective name.
      * @param {string} userName Name of user.
@@ -40,4 +41,4 @@ declare class WorldOfTanksUser extends BaseClass {
      */
     topTanks(userID: number | string): Promise<WOTTopTanksResolve[] | null>;
 }
-export { WorldOfTanksUser };
+export { WOTUser };

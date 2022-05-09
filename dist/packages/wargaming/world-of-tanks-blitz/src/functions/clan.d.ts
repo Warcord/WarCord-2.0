@@ -1,12 +1,13 @@
 import { BaseClass } from "../../../../../builds/class/base";
 import { WOTBClanResolve } from '../interfaces/clan/clan-resolve';
 import { ClanSearchBlitz } from "../interfaces/clan/search";
+import { AllRealms } from "../../../../..";
 declare class WOTBClan extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: AllRealms;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Get a clan in World of Tanks Blitz.
      * @param {string | number} clanID ID of clan.
