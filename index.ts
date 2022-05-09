@@ -6,36 +6,38 @@ import { WOTTopTanksResolve } from './packages/wargaming/world-of-tanks/src/inte
 import { WOTUserResolve } from './packages/wargaming/world-of-tanks/src/interfaces/user/user-return'
 import { UserSearchResolve } from './packages/wargaming/build/interfaces/search-resolve'
 import { BaseClass } from './builds/class/base'
+import { warn } from 'console'
 
+type AllRealms = | 'na' | 'eu' |'ru' | 'asia'
 class WarCord extends BaseClass {
 
     app: {
         id: string,
-        lang?: string
+        realm?: AllRealms
     }
     wg: WargamingBase
 
     /**
      * @param {string} app_id The ID of your WarGaming App.
-     * @param {string} [lang=na] The followed types are an option: 'na' | 'eu' |'ru' | 'asia'.
+     * @param {string} [realm=na] The followed types are an option: .
      */
-    constructor(app_id: string, lang?: string) {
+    constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: this.idChecker(app_id), lang: this.langChecker(lang) }
-        this.wg = new WargamingBase(this.idChecker(app_id), this.langChecker(lang))
+        this.app = { id: this.idChecker(app_id), realm: this.realmChecker(realm) }
+        this.wg = new WargamingBase(this.idChecker(app_id), this.realmChecker(realm))
     }
 
     private idChecker(id: string): string {
         if (!id || id.length <= 0) {
-            console.log('[WarCord] Your API ID is empty. (using Wargaming API)')
+            warn('[WarCord] Your API ID is empty. (using Wargaming API)')
             return ''
         } else {
             return id
         }
     }
 
-    private langChecker(lang: string | undefined): string {
-        if (!lang) return 'com'
+    private realmChecker(realm: AllRealms | undefined): AllRealms {
+        if (!realm) return 'com' as AllRealms
         const langs = [
             'na',
             'eu',
@@ -43,10 +45,10 @@ class WarCord extends BaseClass {
             'asia'
         ]
 
-        if (!langs.includes(lang)) { console.log('[WarCord] Your API Lang is not valid. (using Wargaming API)'); return 'com' }
-        if (lang == 'na') { lang = 'com' }
+        if (!langs.includes(realm)) { warn('[WarCord] Your API Lang is not valid. (using Wargaming API)'); return 'com' as AllRealms }
+        if (realm == 'na') { realm = 'com' as AllRealms }
 
-        return lang
+        return realm
     }
 }
 
@@ -55,3 +57,6 @@ export { WarCord }
 
 //Interfaces export
 export { WOTClanResolve, WOTClanSearchResolve, WOTTanksResolve, WOTTopTanksResolve, WOTUserResolve, UserSearchResolve }
+
+//Types export
+export { AllRealms }

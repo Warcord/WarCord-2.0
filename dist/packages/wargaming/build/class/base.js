@@ -12,23 +12,23 @@ const user_3 = require("../../world-of-warships/src/functions/user");
 const ship_1 = require("../../world-of-warships/src/functions/ship");
 const clan_3 = require("../../world-of-warships/src/functions/clan");
 class WargamingBase extends base_1.BaseClass {
-    constructor(app_id, lang) {
+    constructor(app_id, realm) {
         super(app_id);
-        this.app = { id: app_id, lang: lang };
+        this.app = { id: app_id, realm: realm };
         this.wot = {
-            user: new user_1.WorldOfTanksUser(app_id, lang),
-            tank: new tank_1.WorldOfTanksTank(app_id, lang),
-            clan: new clan_1.WorldOfTanksClan(app_id, lang)
+            user: new user_1.WOTUser(app_id, realm),
+            tank: new tank_1.WOTTank(app_id, realm),
+            clan: new clan_1.WOTClan(app_id, realm)
         };
         this.blitz = {
-            user: new user_2.WOTBUser(app_id, lang),
-            tank: new tank_2.WOTBTank(app_id, lang),
-            clan: new clan_2.WOTBClan(app_id, lang)
+            user: new user_2.WOTBUser(app_id, realm),
+            tank: new tank_2.WOTBTank(app_id, realm),
+            clan: new clan_2.WOTBClan(app_id, realm)
         };
         this.wows = {
-            user: new user_3.WOWSUser(app_id, lang),
-            ship: new ship_1.WOWSShip(app_id, lang),
-            clan: new clan_3.WOWSClans(app_id, lang)
+            user: new user_3.WOWSUser(app_id, realm),
+            ship: new ship_1.WOWSShip(app_id, realm),
+            clan: new clan_3.WOWSClans(app_id, realm)
         };
     }
 }

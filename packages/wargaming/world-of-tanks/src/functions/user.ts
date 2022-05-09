@@ -3,13 +3,14 @@ import { UserSearchResolve } from '../../../build/interfaces/search-resolve'
 import axios from 'axios'
 import { WOTTopTanksResolve } from '../interfaces/tank/top-tanks'
 import { BaseClass } from '../../../../../builds/class/base'
+import { AllRealms } from '../../../../..'
 
-class WorldOfTanksUser extends BaseClass {
+class WOTUser extends BaseClass {
 
-    app: { id: string, lang?: string }
-    constructor(app_id: string, lang?: string) {
+    app: { id: string, realm?: AllRealms }
+    constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: app_id, lang: lang }
+        this.app = { id: app_id, realm: realm }
     }
 
     /**
@@ -26,7 +27,7 @@ class WorldOfTanksUser extends BaseClass {
      */
 
     public async search(userName: string): Promise<UserSearchResolve[] | null> {
-        const searchUser = await ((await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/account/list/?application_id=${this.app?.id}&search=${userName}`)).data).data
+        const searchUser = await ((await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/account/list/?application_id=${this.app?.id}&search=${userName}`)).data).data
         if (!searchUser || searchUser.length <= 0) return null
         return searchUser
     }
@@ -41,7 +42,7 @@ class WorldOfTanksUser extends BaseClass {
      */
 
     public async get(userID: number | string): Promise<WOTUserResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
         if (data.status == "error") return null
         data = data.data[userID]
 
@@ -69,7 +70,7 @@ class WorldOfTanksUser extends BaseClass {
      * const topTanks = await <Warcord>.wg.wot.user.topTanks('Wargaming ID of User')
      */
     public async topTanks(userID: number | string): Promise<WOTTopTanksResolve[] | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.lang}/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data
+        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data
         if (data.status == "error") return null
         data = data.data[userID]
         data.length = 5
@@ -77,4 +78,4 @@ class WorldOfTanksUser extends BaseClass {
     }
 }
 
-export { WorldOfTanksUser }
+export { WOTUser }

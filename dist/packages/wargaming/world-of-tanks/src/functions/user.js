@@ -12,13 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WorldOfTanksUser = void 0;
+exports.WOTUser = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
-class WorldOfTanksUser extends base_1.BaseClass {
-    constructor(app_id, lang) {
+class WOTUser extends base_1.BaseClass {
+    constructor(app_id, realm) {
         super(app_id);
-        this.app = { id: app_id, lang: lang };
+        this.app = { id: app_id, realm: realm };
     }
     /**
      * @description Search users with respective name.
@@ -35,7 +35,7 @@ class WorldOfTanksUser extends base_1.BaseClass {
     search(userName) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const searchUser = yield ((yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/account/list/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&search=${userName}`)).data).data;
+            const searchUser = yield ((yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/account/list/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&search=${userName}`)).data).data;
             if (!searchUser || searchUser.length <= 0)
                 return null;
             return searchUser;
@@ -52,7 +52,7 @@ class WorldOfTanksUser extends base_1.BaseClass {
     get(userID) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/account/info/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&account_id=${userID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/account/info/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&account_id=${userID}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data[userID];
@@ -81,7 +81,7 @@ class WorldOfTanksUser extends base_1.BaseClass {
      */
     topTanks(userID) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.lang}/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data[userID];
@@ -90,4 +90,4 @@ class WorldOfTanksUser extends base_1.BaseClass {
         });
     }
 }
-exports.WorldOfTanksUser = WorldOfTanksUser;
+exports.WOTUser = WOTUser;

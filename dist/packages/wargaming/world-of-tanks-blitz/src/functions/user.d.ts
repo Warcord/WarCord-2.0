@@ -2,12 +2,13 @@ import { BaseClass } from "../../../../../builds/class/base";
 import { WOTBUserResolve } from '../interfaces/user/user-return';
 import { UserSearchResolve } from '../../../build/interfaces/search-resolve';
 import { WOTBTankTop } from '../interfaces/tank/tank-top';
+import { AllRealms } from "../../../../..";
 declare class WOTBUser extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: AllRealms;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Get the user data by ID.
      * @param {string | number} userID

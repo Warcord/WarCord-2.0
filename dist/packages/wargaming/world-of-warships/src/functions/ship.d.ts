@@ -1,12 +1,13 @@
 import { BaseClass } from "../../../../../builds/class/base";
 import { WOWSShipResolve } from '../interfaces/ships/resolve';
 import { WOWSLongShipResolve } from "../interfaces/ships/resolve-long";
+import { AllRealms } from "../../../../..";
 declare class WOWSShip extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: AllRealms;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Get the ships status of an user.
      * @param {string} userID the ID of user.
@@ -17,6 +18,7 @@ declare class WOWSShip extends BaseClass {
      */
     get(userID: string | number): Promise<WOWSShipResolve[] | null>;
     /**
+     * @description Get a ship based on params.
      * @param {Object} ops
      * @property {?string} ops.nation The nation of ship.
      * @property {?string} ops.string The type of ship.

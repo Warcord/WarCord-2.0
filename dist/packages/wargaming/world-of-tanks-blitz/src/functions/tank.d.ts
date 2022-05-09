@@ -1,11 +1,12 @@
 import { BaseClass } from "../../../../../builds/class/base";
 import { WOTBTankResolve } from '../interfaces/tank/tank-resolve';
+import { AllRealms } from "../../../../..";
 declare class WOTBTank extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: AllRealms;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Get the tank by ID.
      * @param {string | number} tankID

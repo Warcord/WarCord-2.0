@@ -3,13 +3,14 @@ import axios from "axios";
 import { WOTBUserResolve } from '../interfaces/user/user-return';
 import { UserSearchResolve } from '../../../build/interfaces/search-resolve';
 import { WOTBTankTop } from '../interfaces/tank/tank-top'
+import { AllRealms } from "../../../../..";
 
 class WOTBUser extends BaseClass {
 
-    app: { id: string, lang?: string }
-    constructor(app_id: string, lang?: string) {
+    app: { id: string, realm?: AllRealms }
+    constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: app_id, lang: lang }
+        this.app = { id: app_id, realm: realm }
     }
 
     /**
@@ -21,7 +22,7 @@ class WOTBUser extends BaseClass {
      * const user = await <Warcord>.wg.blitz.user.get('Wargaming ID of User')
      */
     public async get(userID: string | number): Promise<WOTBUserResolve | null> {
-        let data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/account/info/?application_id=${this.app.id}&account_id=${userID}`)).data
+        let data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/account/info/?application_id=${this.app.id}&account_id=${userID}`)).data
 
         if (data.status == "error") return null
         data = data.data[userID]
@@ -50,7 +51,7 @@ class WOTBUser extends BaseClass {
      * //this returns the first user data.
      */
     public async search(userName: string): Promise<UserSearchResolve | null> {
-        let data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/account/list/?application_id=${this.app.id}&search=${userName}`)).data
+        let data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/account/list/?application_id=${this.app.id}&search=${userName}`)).data
         if (data.status == "error" || data.data.length <= 0) return null
         return data.data
     }
@@ -65,7 +66,7 @@ class WOTBUser extends BaseClass {
      */
     public async topTanks(userID: string | number): Promise<WOTBTankTop | null> {
 
-        let data = await (await axios.get(`https://api.wotblitz.${this.app.lang}/wotb/tanks/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
+        let data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tanks/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
 
         if (data.status == "error" || data.data.length <= 0) return null
         data = data.data[userID]

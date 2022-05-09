@@ -1,12 +1,13 @@
 import { WOWSClansResolve } from '../interfaces/clan/clan-resolve';
 import { WOWSClansSearchResolve } from '../interfaces/clan/search-resolve';
 import { BaseClass } from '../../../../../builds/class/base';
+import { AllRealms } from '../../../../..';
 declare class WOWSClans extends BaseClass {
     app: {
         id: string;
-        lang?: string;
+        realm?: AllRealms;
     };
-    constructor(app_id: string, lang?: string);
+    constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Get a clan in World of WarShips.
      * @param {number | string} clanID ID of clan.

@@ -3,13 +3,14 @@ import axios from "axios";
 import { WOWSShipResolve } from '../interfaces/ships/resolve'
 import { warn } from "console";
 import { WOWSLongShipResolve } from "../interfaces/ships/resolve-long";
+import { AllRealms } from "../../../../..";
 
 class WOWSShip extends BaseClass {
 
-    app: { id: string, lang?: string }
-    constructor(app_id: string, lang?: string) {
+    app: { id: string, realm?: AllRealms }
+    constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: app_id, lang: lang }
+        this.app = { id: app_id, realm: realm }
     }
 
     /**
@@ -21,7 +22,7 @@ class WOWSShip extends BaseClass {
      * const ships = await <Warcord>.wg.wows.ship.get('ID of User')
      */
     public async get(userID: string | number): Promise<WOWSShipResolve[] | null> {
-        var data = await (await axios.get(`https://api.worldofwarships.${this.app.lang}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
+        var data = await (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
         if (data.status == "error") return null;
 
         return data.data[userID]
@@ -72,7 +73,7 @@ class WOWSShip extends BaseClass {
         nation? option = option + '&nation=' + nation : ''
         type? option = option + '&type=' + type : ''
 
-        var data = await (await axios.get(`https://api.worldofwarships.${this.app.lang}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data
+        var data = await (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data
         if (data.status == "error") return null;
 
         return data.data

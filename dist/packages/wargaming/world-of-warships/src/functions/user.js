@@ -16,9 +16,9 @@ exports.WOWSUser = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
 class WOWSUser extends base_1.BaseClass {
-    constructor(app_id, lang) {
+    constructor(app_id, realm) {
         super(app_id);
-        this.app = { id: app_id, lang: lang };
+        this.app = { id: app_id, realm: realm };
     }
     /**
      * @description Search users with respective name.
@@ -28,7 +28,7 @@ class WOWSUser extends base_1.BaseClass {
     search(userName) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const searchUser = yield ((yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/account/list/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&search=${userName}`)).data).data;
+            const searchUser = yield ((yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/account/list/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&search=${userName}`)).data).data;
             if (!searchUser || searchUser.length <= 0)
                 return null;
             return searchUser;
@@ -42,7 +42,7 @@ class WOWSUser extends base_1.BaseClass {
     get(userID) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.lang}/wows/account/info/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&account_id=${userID}`)).data;
+            let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/account/info/?application_id=${(_a = this.app) === null || _a === void 0 ? void 0 : _a.id}&account_id=${userID}`)).data;
             if (data.status == "error")
                 return null;
             data = data.data[userID];
