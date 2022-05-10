@@ -8,7 +8,8 @@ import { UserSearchResolve } from './packages/wargaming/build/interfaces/search-
 import { BaseClass } from './builds/class/base'
 import { warn } from 'console'
 
-type AllRealms = | 'na' | 'eu' |'ru' | 'asia'
+declare type AllRealms = | 'na' | 'eu' | 'ru' | 'asia'
+
 class WarCord extends BaseClass {
 
     app: {
@@ -50,6 +51,8 @@ class WarCord extends BaseClass {
 
         return realm
     }
+
+
 }
 
 //Main class export
