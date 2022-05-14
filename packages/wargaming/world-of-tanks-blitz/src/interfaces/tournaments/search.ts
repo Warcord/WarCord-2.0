@@ -1,5 +1,7 @@
+export declare type StautsTournaments = 'upcoming' | 'registration_finished' | 'finished' | 'registration_started' | 'running' | 'complete'
+
 export declare interface WOTBTournamentsSearch {
-    status: string,
+    status: StautsTournaments,
     fee: {
         currency?: string,
         amount?: number

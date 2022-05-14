@@ -3,9 +3,17 @@ import { WOTBTournamentsSearch } from '../interfaces/tournaments/search'
 import { BaseClass } from '../../../../../builds/class/base'
 import { AllRealms } from '../../../../..'
 import { warn } from 'console'
+import { StautsTournaments } from '../interfaces/tournaments/search'
+import { WOTBGetTeam } from '../interfaces/tournaments/team'
+
 
 export declare type AcceptedLanguagesFindWOTBTournaments = 'en' | 'es' | 'pt'
-
+/**
+ * @forming team roster is not yet confirmed
+ * @confirmed team roster is confirmed
+ * @disqualified team is disqualified
+ */
+export declare type StatusTeams = 'forming' | 'confirmed' | 'disqualified'
 class WOTBTournaments extends BaseClass {
 
     app: { id: string, realm?: AllRealms }
@@ -15,7 +23,7 @@ class WOTBTournaments extends BaseClass {
     }
 
 
-    public async find(options?: { lang?: AcceptedLanguagesFindWOTBTournaments, limit?: number, search?: string, status?: string | string[] }): Promise<WOTBTournamentsSearch[] | null> {
+    public async find(options?: { lang?: AcceptedLanguagesFindWOTBTournaments, limit?: number, search?: string, status?: StautsTournaments | StautsTournaments[] }): Promise<WOTBTournamentsSearch[] | null> {
         
         let option = ''
         if (options && options.limit) {
@@ -52,6 +60,68 @@ class WOTBTournaments extends BaseClass {
         return data.data
     }
 
-}
+    public async get(tourID: string, options?: { language?: AcceptedLanguagesFindWOTBTournaments }): Promise<WOTBTournamentsGet | null> {
+
+        let option = ''
+        if (options && options?.language) {
+            option = option + `&language=${options.language}`
+        }
+        const data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/info/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data
+        if (data.status == "error") return null
+
+        return data.data
+    }
+
+    public readonly teams = {
+        /**
+         * @description Get the teams of an tournament.
+         * @param tourID ID of Tournament.
+         * @param {Object} options The options Object.
+         * @property {string} options.account_id ID of the account that belongs to the team.
+         * @property {string} options.clan_id ID of the clan that owns the team.
+         * @property {string} [options.language="en"] Localization language.
+         * @property {number} [options.limit=10] Number of returned entries. Min value is 1. Maximum value: 100.
+         * @property {string} options.search First letters in team name for search. Minimum length: 2 characters. Maximum length: 50 characters.
+         * @property {StatusTeams | StatusTeams[]} options.status Team status.
+         * @property {number | number[]} options.team Team ID. Maximum limit: 25.
+         */
+        get: async (tourID: string, options?: { account_id?: string, clan_id?: string, language?: string, limit?: number, search?: string, status?: StatusTeams | StatusTeams[], team?: number | number[] }): Promise<WOTBGetTeam | null> => {
+
+            let option = ''
+            if (options) {
+                let { account_id, clan_id, language, limit, search, status, team } = options
+
+                if (limit && !(limit > 100 || limit < 1)) {
+                    warn("[WARCORD] The minimum or maximum of the limit is invalid. Using the default...")
+                    limit = 100
+                }
+
+                const langs = [ 'en', 'es', 'pt' ]
+                if (language && !langs.includes(language)) {
+                    warn("[WARCORD] The language is invalid. Using the default...")
+                    language = "en"
+                }
+
+                if (search && !(search.length < 2 || search.length > 50)) {
+                    throw Error("[WARCORD] The maximum of an search query is 50 characters and the minimum is 2 characters.")
+                }
+
+                account_id ? option = option + `&account_id=${account_id}` : ''
+                clan_id ? option = option + `&clan_id=${clan_id}` : ''
+                language ? option = option + `&language=${language}` : ''
+                limit ? option = option + `&limit=${limit}` : ''
+                search ? option = option + `&search=${search}` : ''
+                status ? option = option + `&status=${status}` : ''
+                team ? option = option + `&team=${team}` : ''
+            }
+
+            const data = (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/teams/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data
+            if (data.status == "error") return null
+
+            return data.data
+        },
+
+    }
+}   
 
 export { WOTBTournaments }
