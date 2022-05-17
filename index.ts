@@ -14,6 +14,7 @@ import { WOTClan } from './packages/wargaming/world-of-tanks/src/functions/clan'
 import { WOTBUser } from './packages/wargaming/world-of-tanks-blitz/src/functions/user'
 import { WOTBTank } from './packages/wargaming/world-of-tanks-blitz/src/functions/tank'
 import { WOTBClan } from './packages/wargaming/world-of-tanks-blitz/src/functions/clan'
+import { WOTBTournaments } from './packages/wargaming/world-of-tanks-blitz/src/functions/tournaments'
 
 import { WOWSUser } from './packages/wargaming/world-of-warships/src/functions/user'
 import { WOWSShip } from './packages/wargaming/world-of-warships/src/functions/ship'
@@ -35,7 +36,8 @@ class WarCord extends BaseClass {
     blitz: {
         user: WOTBUser,
         tank: WOTBTank,
-        clan: WOTBClan
+        clan: WOTBClan,
+        tournaments: WOTBTournaments
     }
     wows: {
         user: WOWSUser,
@@ -58,7 +60,8 @@ class WarCord extends BaseClass {
         this.blitz = {
             user: new WOTBUser(this.app.id, this.app.realm),
             tank: new WOTBTank(this.app.id, this.app.realm),
-            clan: new WOTBClan(this.app.id, this.app.realm)
+            clan: new WOTBClan(this.app.id, this.app.realm),
+            tournaments: new WOTBTournaments(this.app.id, this.app.realm)
         }
         this.wows = {
             user: new WOWSUser(this.app.id, this.app.realm),
