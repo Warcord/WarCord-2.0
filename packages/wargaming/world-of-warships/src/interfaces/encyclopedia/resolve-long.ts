@@ -1,4 +1,4 @@
-interface WOWSLongShipResolve {
+interface WOWSLongPediaResolve {
 
     description: string | null,
     price_gold: number | null,
@@ -207,4 +207,4 @@ interface WOWSArmour {
     }
 }
 
-export { WOWSTorpSlots, WOWSLongShipResolve, WOWSATBasSlots, WOWSArmour, WOWSArtySlots, WOWSDefaultPSlots, WOWSModulesTree }
+export { WOWSTorpSlots, WOWSLongPediaResolve, WOWSATBasSlots, WOWSArmour, WOWSArtySlots, WOWSDefaultPSlots, WOWSModulesTree }
