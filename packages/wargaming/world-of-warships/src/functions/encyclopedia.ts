@@ -6,16 +6,7 @@ import { WOWSLongPediaResolve } from "../interfaces/encyclopedia/resolve-long";
 import { AllRealms } from "../../../../..";
 import { WOWSPediaCommandersSearch } from "../interfaces/encyclopedia/commanders/search";
 
-type AcceptedLangs = "cs" /** Čeština */ | "de" /** Deutsch */ | "en" /** English (by default) */ | "es" /** Español */ | "fr" /** Français */ |
-    "ja" /** 日本語 */ |
-    "pl" /** Polski */ |
-    "ru" /** Русский */ |
-    "th" /** ไทย */ |
-    "zh-tw" /** 繁體中文 */ |
-    "tr" /** Türkçe */ |
-    "zh-cn" /** 中文 */ |
-    "pt-br" /** Português do Brasil */ |
-    "es-mx"
+type AcceptedLangs = "cs" /** Čeština */ | "de" /** Deutsch */ | "en" /** English (by default) */ | "es" /** Español */ | "fr" /** Français */ | "ja" /** 日本語 */ | "pl" /** Polski */ | "ru" /** Русский */ | "th" /** ไทย */ | "zh-tw" /** 繁體中文 */ | "tr" /** Türkçe */ | "zh-cn" /** 中文 */ | "pt-br" /** Português do Brasil */ | "es-mx"
 
 class WOWSEncyclopedia extends BaseClass {
 
@@ -34,7 +25,7 @@ class WOWSEncyclopedia extends BaseClass {
      * const ships = await <Warcord>.wg.wows.ship.get('ID of User')
      */
     public async get(userID: string | number): Promise<WOWSPediaResolve[] | null> {
-        var data = await (await axios.get(`https:/**api.worldofwarships.${this.app.realm}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
+        var data = await (await axios.get(`https:/api.worldofwarships.${this.app.realm}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
         if (data.status == "error") return null;
 
         return data.data[userID]
@@ -85,7 +76,7 @@ class WOWSEncyclopedia extends BaseClass {
         nation ? option = option + '&nation=' + nation : ''
         type ? option = option + '&type=' + type : ''
 
-        var data = await (await axios.get(`https:/**api.worldofwarships.${this.app.realm}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data
+        var data = await (await axios.get(`https:/api.worldofwarships.${this.app.realm}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data
         if (data.status == "error") return null;
 
         return data.data

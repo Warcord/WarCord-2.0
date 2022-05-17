@@ -5,6 +5,9 @@ import { BaseClass } from '../../../../../builds/class/base'
 
 import { WOWSUserResolve } from '../interfaces/user/result'
 import { AllRealms } from '../../../../..'
+import { warn } from 'console'
+
+type AcceptedLangs = "cs" /** Čeština */ | "de" /** Deutsch */ | "en" /** English (by default) */ | "es" /** Español */ | "fr" /** Français */ | "ja" /** 日本語 */ | "pl" /** Polski */ | "ru" /** Русский */ | "th" /** ไทย */ | "zh-tw" /** 繁體中文 */ | "tr" /** Türkçe */ | "zh-cn" /** 中文 */ | "pt-br" /** Português do Brasil */ | "es-mx"
 
 class WOWSUser extends BaseClass {
 
@@ -38,6 +41,48 @@ class WOWSUser extends BaseClass {
         data = data.data[userID]
 
         return data;
+    }
+
+    /**
+     * @description Get all achievements of an user.
+     * @param account_id Player account ID.
+     * @param {Object} options Options Object
+     * @property {AcceptedLangs} options.language Localization language.
+     * @returns {Promise<{ battle: any, progress: any } | null>} The achievements of user.
+     */
+    public async achievements(account_id: string, options?: { language?: AcceptedLangs }): Promise<{ battle: any, progress: any } | null> {
+        
+        let option = ''
+        if (options && options.language) {
+            
+            const acceptedLangs = [
+                "cs", /** Čeština */
+                "de", /** Deutsch */
+                "en", /** English (by default) */
+                "es", /** Español */
+                "fr", /** Français */
+                "ja", /** 日本語 */
+                "pl", /** Polski */
+                "ru", /** Русский */
+                "th", /** ไทย */
+                "zh-tw", /** 繁體中文 */
+                "tr", /** Türkçe */
+                "zh-cn", /** 中文 */
+                "pt-br", /** Português do Brasil */
+                "es-mx"  /** Español (México) */
+            ]
+            if (!acceptedLangs.includes(options.language)) {
+                warn("[WARCORD] The language is invalid. Using the default...")
+                options.language = "en"
+            }
+        }
+
+        options?.language ? option = option + '&language=' + options?.language : ''
+
+        const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/account/achievements/?application_id=${this.app.id}&account_id=${account_id}${option}`)).data
+        if (data.status == "error") return null
+
+        return data.data;
     }
 }
 
