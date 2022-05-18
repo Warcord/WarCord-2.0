@@ -72,7 +72,7 @@ class WOWSEncyclopedia extends BaseClass {
         type ? option = option + '&type=' + type : ''
 
         var data = await (await axios.get(`https:/api.worldofwarships.${this.app.realm}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data
-        if (data.status == "error") return null;
+        if (data.status == "error") return data.error;
 
         return data.data
     }
@@ -140,7 +140,7 @@ class WOWSEncyclopedia extends BaseClass {
         }
 
         const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/shipprofile/?application_id=${this.app.id}&ship_id=${ship_id}${option}`)).data
-        if (data.status = "error") return null
+        if (data.status == "error") return data.error
         return data.data
     }
 
@@ -188,7 +188,7 @@ class WOWSEncyclopedia extends BaseClass {
             }
 
             const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/crews/?application_id=${this.app.id}${option}`)).data
-            if (data.status == "error") return null;
+            if (data.status == "error") return data.error;
 
             return data.data
         },
@@ -233,7 +233,7 @@ class WOWSEncyclopedia extends BaseClass {
 
 
             const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/crewranks/?application_id=${this.app.id}${option}`)).data
-            if (data.status == "error") return null
+            if (data.status == "error") return data.error
 
             return data.data
         }

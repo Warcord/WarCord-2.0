@@ -64,7 +64,7 @@ class WOTTank extends BaseClass {
         tier ? option = option + '&tier=' + tier : ''
 
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
         return data.data
     }
     
@@ -79,7 +79,7 @@ class WOTTank extends BaseClass {
     
     public async get(tankID: number | string): Promise<WOTTanksResolve | null> {
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
         data = data.data[tankID]
 
         return {

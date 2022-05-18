@@ -65,7 +65,7 @@ class WOTBTournaments extends BaseClass {
         }
 
         var data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/list/?application_id=${this.app.id}${option}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
 
         return data.data
     }
@@ -84,7 +84,7 @@ class WOTBTournaments extends BaseClass {
             option = option + `&language=${options.language}`
         }
         const data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/info/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
 
         return data.data
     }
@@ -125,7 +125,7 @@ class WOTBTournaments extends BaseClass {
         }
 
         const data = (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/standings/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
 
         return data.data
     }
@@ -175,7 +175,7 @@ class WOTBTournaments extends BaseClass {
             }
 
             const data = (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/teams/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data
-            if (data.status == "error") return null
+            if (data.status == "error") return data.error
 
             return data.data
         }

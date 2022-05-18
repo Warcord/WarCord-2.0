@@ -23,7 +23,7 @@ class WOTBClan extends BaseClass {
 
     public async get(clanID: string | number): Promise<WOTBClanResolve | null> {
         let data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
         return data.data[clanID]
     }
 

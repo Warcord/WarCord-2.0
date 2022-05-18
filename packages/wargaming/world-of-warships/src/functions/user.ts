@@ -37,7 +37,7 @@ class WOWSUser extends BaseClass {
 
     public async get(userID: number | string): Promise<WOWSUserResolve | null> {
         let data = await (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
         data = data.data[userID]
 
         return data;
@@ -80,7 +80,7 @@ class WOWSUser extends BaseClass {
         options?.language ? option = option + '&language=' + options?.language : ''
 
         const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/account/achievements/?application_id=${this.app.id}&account_id=${account_id}${option}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
 
         return data.data;
     }
@@ -95,7 +95,7 @@ class WOWSUser extends BaseClass {
      */
          public async shipStats(account_id: string | number): Promise<WOWSPediaResolve[] | null> {
             var data = await (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/ships/stats/?application_id=${this.app.id}&account_id=${account_id}`)).data
-            if (data.status == "error") return null;
+            if (data.status == "error") return data.error;
     
             return data.data[account_id]
         }
