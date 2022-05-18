@@ -18,7 +18,7 @@ class WOTBTank extends BaseClass {
      */
     public async get(tankID: string | number): Promise<WOTBTankResolve | null> {
         var data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
 
         return data.data[tankID]
     }

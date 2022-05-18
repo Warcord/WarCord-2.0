@@ -17,7 +17,7 @@ import { WOTBClan } from './packages/wargaming/world-of-tanks-blitz/src/function
 import { WOTBTournaments } from './packages/wargaming/world-of-tanks-blitz/src/functions/tournaments'
 
 import { WOWSUser } from './packages/wargaming/world-of-warships/src/functions/user'
-import { WOWSShip } from './packages/wargaming/world-of-warships/src/functions/ship'
+import { WOWSEncyclopedia } from './packages/wargaming/world-of-warships/src/functions/encyclopedia'
 import { WOWSClans } from './packages/wargaming/world-of-warships/src/functions/clan'
 
 declare type AllRealms = | 'na' | 'eu' | 'ru' | 'asia'
@@ -41,7 +41,7 @@ class WarCord extends BaseClass {
     }
     wows: {
         user: WOWSUser,
-        ship: WOWSShip,
+        pedia: WOWSEncyclopedia,
         clan: WOWSClans
     }
 
@@ -65,7 +65,7 @@ class WarCord extends BaseClass {
         }
         this.wows = {
             user: new WOWSUser(this.app.id, this.app.realm),
-            ship: new WOWSShip(this.app.id, this.app.realm),
+            pedia: new WOWSEncyclopedia(this.app.id, this.app.realm),
             clan: new WOWSClans(this.app.id, this.app.realm)
         }
     }
@@ -92,8 +92,6 @@ class WarCord extends BaseClass {
 
         return realm
     }
-
-
 }
 
 //Main class export

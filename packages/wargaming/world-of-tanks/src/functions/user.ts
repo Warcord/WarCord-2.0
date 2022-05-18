@@ -43,7 +43,7 @@ class WOTUser extends BaseClass {
 
     public async get(userID: number | string): Promise<WOTUserResolve | null> {
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/account/info/?application_id=${this.app?.id}&account_id=${userID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
         data = data.data[userID]
 
         return {
@@ -71,7 +71,7 @@ class WOTUser extends BaseClass {
      */
     public async topTanks(userID: number | string): Promise<WOTTopTanksResolve[] | null> {
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/account/tanks/?application_id=${this.app.id}&account_id=${userID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
         data = data.data[userID]
         data.length = 5
         return data

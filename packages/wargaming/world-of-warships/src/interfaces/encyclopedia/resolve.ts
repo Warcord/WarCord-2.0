@@ -1,4 +1,4 @@
-interface WOWSShipResolve {
+interface WOWSPediaResolve {
     pvp: {
         max_xp: number | null,
         damage_to_buildings: number | null,
@@ -66,4 +66,4 @@ interface WOWSShipResolve {
     ship_id: number | null
 }
 
-export { WOWSShipResolve }
+export { WOWSPediaResolve }
