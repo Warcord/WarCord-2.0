@@ -6,7 +6,9 @@ import { WOWSLongPediaResolve } from "../interfaces/encyclopedia/resolve-long";
 import { AllRealms } from "../../../../..";
 import { WOWSPediaCommandersSearch } from "../interfaces/encyclopedia/commanders/search";
 import { WOWSShipParams } from "../interfaces/encyclopedia/params";
+import { WOWSCommanderRank } from "../interfaces/encyclopedia/commanders/rank"
 
+type AcceptedNations = "europe" | "commonwealth" | "netherlands" | "italy" | "usa" | "ussr" | "pan_asia" | "france" | "germany" | "uk" | "japan" | "pan_america"
 type AcceptedLangs = "cs" /** Čeština */ | "de" /** Deutsch */ | "en" /** English (by default) */ | "es" /** Español */ | "fr" /** Français */ | "ja" /** 日本語 */ | "pl" /** Polski */ | "ru" /** Русский */ | "th" /** ไทย */ | "zh-tw" /** 繁體中文 */ | "tr" /** Türkçe */ | "zh-cn" /** 中文 */ | "pt-br" /** Português do Brasil */ | "es-mx"
 
 class WOWSEncyclopedia extends BaseClass {
@@ -150,7 +152,7 @@ class WOWSEncyclopedia extends BaseClass {
          * @property {AcceptedLangs} options.Localization language. Commander ID
          * @returns {Promise<WOWSPediaCommandersSearch | null>}
          */
-        search: async (options?: { commander_id: string | string[], language: AcceptedLangs }): Promise<WOWSPediaCommandersSearch | null> => {
+        search: async (options?: { commander_id?: string | string[], language?: AcceptedLangs }): Promise<WOWSPediaCommandersSearch | null> => {
 
             let option = ''
             if (options) {
@@ -177,7 +179,7 @@ class WOWSEncyclopedia extends BaseClass {
                     "es-mx"  /** Español (México) */
                 ]
 
-                if (!acceptedLangs.includes(language)) {
+                if (language && !acceptedLangs.includes(language)) {
                     warn("[WARCORD] The language is invalid. Using the default...")
                     language = "en"
                 }
@@ -187,6 +189,51 @@ class WOWSEncyclopedia extends BaseClass {
 
             const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/crews/?application_id=${this.app.id}${option}`)).data
             if (data.status == "error") return null;
+
+            return data.data
+        },
+
+        ranks: async (options?: { language?: AcceptedLangs, nation?: AcceptedNations }): Promise<WOWSCommanderRank | null> => {
+
+            let option = ''
+            if (options) {
+
+                let { language, nation } = options
+
+                const acceptedLangs = [
+                    "cs", /** Čeština */
+                    "de", /** Deutsch */
+                    "en", /** English (by default) */
+                    "es", /** Español */
+                    "fr", /** Français */
+                    "ja", /** 日本語 */
+                    "pl", /** Polski */
+                    "ru", /** Русский */
+                    "th", /** ไทย */
+                    "zh-tw", /** 繁體中文 */
+                    "tr", /** Türkçe */
+                    "zh-cn", /** 中文 */
+                    "pt-br", /** Português do Brasil */
+                    "es-mx"  /** Español (México) */
+                ]
+                if (language && !acceptedLangs.includes(language)) {
+                    warn("[WARCORD] The language is invalid. Using the default...")
+                    language = "en"
+                }
+
+                const acceptedNations = [ "europe", "commonwealth", "netherlands", "italy", "usa", "ussr", "pan_asia", "france", "germany", "uk", "japan", "pan_america" ]
+                if (nation && acceptedNations.includes(nation)) {
+                    warn("[WARCORD] Invalid nation.")
+                    nation = undefined
+                }
+
+                language ? option = option + "&language=" + language : ''
+                nation ? option = option + "&nation=" + nation : ''
+            }
+
+
+            const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/crewranks/?application_id=${this.app.id}${option}`)).data
+            if (data.status == "error") return null
 
             return data.data
         }
