@@ -17,18 +17,10 @@ class WOWSEncyclopedia extends BaseClass {
     }
 
     /**
-     * @description Get the ships status of an user.
-     * @param {string} userID the ID of user.
-     * @returns {Promise<WOWSPediaResolve[] | null>}
-     * @example
-     * ...
-     * const ships = await <Warcord>.wg.wows.ship.get('ID of User')
+     * @deprecated Has moved to user. (shipStats)
      */
-    public async get(userID: string | number): Promise<WOWSPediaResolve[] | null> {
-        var data = await (await axios.get(`https:/api.worldofwarships.${this.app.realm}/wows/ships/stats/?application_id=${this.app.id}&account_id=${userID}`)).data
-        if (data.status == "error") return null;
-
-        return data.data[userID]
+    public get(): void {
+        return warn("[WARCORD] The <Warcord>.wg.wows.ship.get() method is deprecated. Use <Warcord>.wg.wows.user.shipStats().")
     }
 
     /**

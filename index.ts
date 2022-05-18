@@ -26,7 +26,8 @@ class WarCord extends BaseClass {
 
     app: {
         id: string,
-        realm?: AllRealms
+        realm?: AllRealms,
+        ToS: boolean
     }
     wot: {
         user: WOTUser,
@@ -51,7 +52,7 @@ class WarCord extends BaseClass {
      */
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
-        this.app = { id: this.idChecker(app_id), realm: this.realmChecker(realm) }
+        this.app = { id: this.idChecker(app_id), realm: this.realmChecker(realm), ToS: false }
         this.wot = {
             user: new WOTUser(this.app.id, this.app.realm),
             tank: new WOTTank(this.app.id, this.app.realm),
@@ -93,7 +94,7 @@ class WarCord extends BaseClass {
         return realm
     }
 
-
+    private checkToS() {}
 }
 
 //Main class export

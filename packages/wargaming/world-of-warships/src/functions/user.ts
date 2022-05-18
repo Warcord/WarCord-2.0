@@ -1,11 +1,11 @@
 import axios from 'axios'
+import { warn } from 'console'
 
 import { UserSearchResolve } from '../../../build/interfaces/search-resolve'
 import { BaseClass } from '../../../../../builds/class/base'
-
+import { WOWSPediaResolve } from '../interfaces/encyclopedia/resolve'
 import { WOWSUserResolve } from '../interfaces/user/result'
 import { AllRealms } from '../../../../..'
-import { warn } from 'console'
 
 type AcceptedLangs = "cs" /** Čeština */ | "de" /** Deutsch */ | "en" /** English (by default) */ | "es" /** Español */ | "fr" /** Français */ | "ja" /** 日本語 */ | "pl" /** Polski */ | "ru" /** Русский */ | "th" /** ไทย */ | "zh-tw" /** 繁體中文 */ | "tr" /** Türkçe */ | "zh-cn" /** 中文 */ | "pt-br" /** Português do Brasil */ | "es-mx"
 
@@ -84,6 +84,22 @@ class WOWSUser extends BaseClass {
 
         return data.data;
     }
+
+    /**
+     * @description Get the ships status of an user.
+     * @param {string} account_id the ID of user.
+     * @returns {Promise<WOWSPediaResolve[] | null>}
+     * @example
+     * ...
+     * const ships = await <Warcord>.wg.wows.user.shipStats('ID of User')
+     */
+         public async shipStats(account_id: string | number): Promise<WOWSPediaResolve[] | null> {
+            var data = await (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/ships/stats/?application_id=${this.app.id}&account_id=${account_id}`)).data
+            if (data.status == "error") return null;
+    
+            return data.data[account_id]
+        }
+    
 }
 
 export { WOWSUser }
