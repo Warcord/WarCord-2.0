@@ -19,6 +19,7 @@ import { WOTBTournaments } from './packages/wargaming/world-of-tanks-blitz/src/f
 import { WOWSUser } from './packages/wargaming/world-of-warships/src/functions/user'
 import { WOWSEncyclopedia } from './packages/wargaming/world-of-warships/src/functions/encyclopedia'
 import { WOWSClans } from './packages/wargaming/world-of-warships/src/functions/clan'
+import WOTCUser from './packages/wargaming/world-of-tanks-console/src/functions/user'
 
 declare type AllRealms = | 'na' | 'eu' | 'ru' | 'asia'
 
@@ -44,10 +45,13 @@ class WarCord extends BaseClass {
         pedia: WOWSEncyclopedia,
         clan: WOWSClans
     }
+    wotc: {
+        user: WOTCUser
+    }
 
     /**
      * @param {string} app_id The ID of your WarGaming App.
-     * @param {string} [realm=na] The followed types are an option: .
+     * @param {string} [realm=na] Location language. Not valid for World of Tanks Console (WOTC).
      */
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
@@ -67,6 +71,9 @@ class WarCord extends BaseClass {
             user: new WOWSUser(this.app.id, this.app.realm),
             pedia: new WOWSEncyclopedia(this.app.id, this.app.realm),
             clan: new WOWSClans(this.app.id, this.app.realm)
+        }
+        this.wotc = {
+            user: new WOTCUser(this.app.id)
         }
     }
 
