@@ -44,19 +44,19 @@ export class WOTCTankopedia extends BaseClass {
             if (tank_id && tank_id > 100) tank_id = 100
             if (tier && tier > 100) tier = 100
 
-            if (tier && tier > 1) {
+            if (tier && typeof tier == "object" && tier.length > 1) {
                 option += '&tier=' + (<number[]>tier).join('%2C')
             } else {
                 tier ? option += '&tier=' + tier : ''
             }
 
-            if (nation && nation.length > 1) {
+            if (nation && typeof nation == "object" && nation.length > 1) {
                 option += '&nation=' + (<string[]>nation).join('%2C')
             } else {
                 nation ? option += '&nation=' + nation : ''
             }
 
-            if (tank_id && tank_id > 1) {
+            if (tank_id && typeof tank_id == "object" && tank_id.length > 1) {
                 option += '&tank_id=' + (<number[]>tank_id).join('%2C')
             } else {
                 tank_id ? option += '&tank_id=' + tank_id : ''

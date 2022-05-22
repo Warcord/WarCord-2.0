@@ -21,6 +21,7 @@ import { WOWSEncyclopedia } from './packages/wargaming/world-of-warships/src/fun
 import { WOWSClans } from './packages/wargaming/world-of-warships/src/functions/clan'
 import WOTCUser from './packages/wargaming/world-of-tanks-console/src/functions/user'
 import WOTCClan from './packages/wargaming/world-of-tanks-console/src/functions/clan'
+import { WOTCTankopedia } from './packages/wargaming/world-of-tanks-console/src/functions/tankopedia'
 
 declare type AllRealms = | 'na' | 'eu' | 'ru' | 'asia'
 
@@ -48,7 +49,8 @@ class WarCord extends BaseClass {
     }
     wotc: {
         user: WOTCUser,
-        clan: WOTCClan
+        clan: WOTCClan,
+        pedia: WOTCTankopedia
     }
 
     /**
@@ -76,7 +78,8 @@ class WarCord extends BaseClass {
         }
         this.wotc = {
             user: new WOTCUser(this.app.id),
-            clan: new WOTCClan(this.app.id)
+            clan: new WOTCClan(this.app.id),
+            pedia: new WOTCTankopedia(this.app.id)
         }
     }
 
