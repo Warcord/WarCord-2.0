@@ -28,10 +28,10 @@ class WOWSEncyclopedia extends BaseClass {
 
     /**
      * @description Get a ship based on params.
-     * @param {Object} ops
+     * @param {object} ops
      * @property {?string} ops.nation The nation of ship.
-     * @property {?string} ops.string The type of ship.
-     * @property {?Object} ops.options Options of query.
+     * @property {?string} ops.type The type of ship.
+     * @property {?object} ops.options Options of query.
      * @property {?number} [ops.options.limit=100] The limit of ships finded.
      * @property {?string} [ops.options.lang=en] The Language of Texts.
      * @returns {Promise<(WOWSPediaResolve & WOWSLongPediaResolve)[] | WOWSLongPediaResolve[] | WOWSPediaResolve[] | null>}

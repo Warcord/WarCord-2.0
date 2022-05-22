@@ -52,7 +52,7 @@ export = class WOTCClan extends BaseClass {
             search ? option += '&search=' + search : ''
         }
 
-        const data = (await axios.get(`https://api-console.worldoftanks.com/wotx/clans/list/?application_id=${this.app.id}`)).data
+        const data = (await axios.get(`https://api-console.worldoftanks.com/wotx/clans/list/?application_id=${this.app.id}${option}`)).data
         if (data.status == "error") return this.errorController.createError(data.error, "API")
 
         return data.data
@@ -85,7 +85,7 @@ export = class WOTCClan extends BaseClass {
 
         if (clan_id.length > 100 || clan_id.length < 1) return this.errorController.createError("Invalid clan_id", "WARCORD")
 
-        const data = (await axios.get(`https://api-console.worldoftanks.com/wotx/clans/info/?application_id=${this.app.id}&clan_id=${clan_id}`)).data
+        const data = (await axios.get(`https://api-console.worldoftanks.com/wotx/clans/info/?application_id=${this.app.id}&clan_id=${clan_id}${option}`)).data
         if (data.status == "error") return this.errorController.createError(data.error, "API")
 
         return data.data
