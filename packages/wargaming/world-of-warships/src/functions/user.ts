@@ -11,7 +11,7 @@ type AcceptedLangs = "cs" /** Čeština */ | "de" /** Deutsch */ | "en" /** Engl
 
 class WOWSUser extends BaseClass {
 
-    app: { id: string, realm?: AllRealms }
+    private app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
         this.app = { id: app_id, realm: realm }
@@ -77,7 +77,7 @@ class WOWSUser extends BaseClass {
             }
         }
 
-        options?.language ? option = option + '&language=' + options?.language : ''
+        options?.language ? option += '&language=' + options?.language : ''
 
         const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/account/achievements/?application_id=${this.app.id}&account_id=${account_id}${option}`)).data
         if (data.status == "error") return data.error

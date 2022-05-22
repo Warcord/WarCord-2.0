@@ -13,7 +13,7 @@ type AcceptedLangs = "cs" /** Čeština */ | "de" /** Deutsch */ | "en" /** Engl
 
 class WOWSEncyclopedia extends BaseClass {
 
-    app: { id: string, realm?: AllRealms }
+    private app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
         this.app = { id: app_id, realm: realm }
@@ -28,10 +28,10 @@ class WOWSEncyclopedia extends BaseClass {
 
     /**
      * @description Get a ship based on params.
-     * @param {Object} ops
+     * @param {object} ops
      * @property {?string} ops.nation The nation of ship.
-     * @property {?string} ops.string The type of ship.
-     * @property {?Object} ops.options Options of query.
+     * @property {?string} ops.type The type of ship.
+     * @property {?object} ops.options Options of query.
      * @property {?number} [ops.options.limit=100] The limit of ships finded.
      * @property {?string} [ops.options.lang=en] The Language of Texts.
      * @returns {Promise<(WOWSPediaResolve & WOWSLongPediaResolve)[] | WOWSLongPediaResolve[] | WOWSPediaResolve[] | null>}
@@ -54,7 +54,7 @@ class WOWSEncyclopedia extends BaseClass {
                 options.limit = 100
             }
 
-            option = option + '&limit=' + options.limit
+            option += '&limit=' + options.limit
         }
 
         const langs = ["cs", "de", "en", "es", "fr", "ja", "pl", "ru", "th", "zh-tw", "tr", "zh-cn", "pt-br", "es-mx"]
@@ -65,11 +65,11 @@ class WOWSEncyclopedia extends BaseClass {
                 warn("[WARCORD WARNING] This language is not supported. Using the default language...")
             }
 
-            option = option + '&language=' + options.lang
+            option += '&language=' + options.lang
         }
 
-        nation ? option = option + '&nation=' + nation : ''
-        type ? option = option + '&type=' + type : ''
+        nation ? option += '&nation=' + nation : ''
+        type ? option += '&type=' + type : ''
 
         var data = await (await axios.get(`https:/api.worldofwarships.${this.app.realm}/wows/encyclopedia/ships/?application_id=${this.app.id}${option}`)).data
         if (data.status == "error") return data.error;
@@ -101,17 +101,17 @@ class WOWSEncyclopedia extends BaseClass {
 
             let { artillery_id, dive_bomber_id, engine_id, fighter_id, fire_control_id, flight_control_id, hull_id, language, torpedo_bomber_id, torpedoes_id } = options
 
-            artillery_id ? option = option + '&artillery_id=' + artillery_id : ''
-            dive_bomber_id ? option = option + '&dive_bomber_id=' + dive_bomber_id : ''
-            engine_id ? option = option + '&engine_id=' + engine_id : ''
-            fighter_id ? option = option + '&fighter_id=' + fighter_id : ''
-            fire_control_id ? option = option + '&fire_control_id=' + fire_control_id : ''
-            fighter_id ? option = option + '&fighter_id=' + fighter_id : ''
-            fire_control_id ? option = option + '&fire_control_id=' + fire_control_id : ''
-            flight_control_id ? option = option + '&flight_control_id=' + flight_control_id : ''
-            hull_id ? option = option + '&hull_id=' + hull_id : ''
-            torpedo_bomber_id ? option = option + '&torpedo_bomber_id=' + torpedo_bomber_id : ''
-            torpedoes_id ? option = option + '&torpedoes_id=' + torpedoes_id : ''
+            artillery_id ? option += '&artillery_id=' + artillery_id : ''
+            dive_bomber_id ? option += '&dive_bomber_id=' + dive_bomber_id : ''
+            engine_id ? option += '&engine_id=' + engine_id : ''
+            fighter_id ? option += '&fighter_id=' + fighter_id : ''
+            fire_control_id ? option += '&fire_control_id=' + fire_control_id : ''
+            fighter_id ? option += '&fighter_id=' + fighter_id : ''
+            fire_control_id ? option += '&fire_control_id=' + fire_control_id : ''
+            flight_control_id ? option += '&flight_control_id=' + flight_control_id : ''
+            hull_id ? option += '&hull_id=' + hull_id : ''
+            torpedo_bomber_id ? option += '&torpedo_bomber_id=' + torpedo_bomber_id : ''
+            torpedoes_id ? option += '&torpedoes_id=' + torpedoes_id : ''
 
             const acceptedLangs = [
                 "cs", /** Čeština */
@@ -136,7 +136,7 @@ class WOWSEncyclopedia extends BaseClass {
                 language = "en"
             }
 
-            language ? option = option + '&language=' + language : ''
+            language ? option += '&language=' + language : ''
         }
 
         const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/shipprofile/?application_id=${this.app.id}&ship_id=${ship_id}${option}`)).data
@@ -159,7 +159,7 @@ class WOWSEncyclopedia extends BaseClass {
                 let { commander_id, language } = options
 
                 if (commander_id) {
-                    commander_id.length > 1 ? option = option + '&commander_id=' + (<string[]>commander_id).join('+') : option = option + '&commander_id=' + commander_id
+                    commander_id.length > 1 ? option += '&commander_id=' + (<string[]>commander_id).join('+') : option += '&commander_id=' + commander_id
                 }
 
                 const acceptedLangs = [
@@ -184,7 +184,7 @@ class WOWSEncyclopedia extends BaseClass {
                     language = "en"
                 }
 
-                language ? option = option + "&language=" + language : ''
+                language ? option += "&language=" + language : ''
             }
 
             const data = (await axios.get(`https://api.worldofwarships.${this.app.realm}/wows/encyclopedia/crews/?application_id=${this.app.id}${option}`)).data
@@ -227,8 +227,8 @@ class WOWSEncyclopedia extends BaseClass {
                     nation = undefined
                 }
 
-                language ? option = option + "&language=" + language : ''
-                nation ? option = option + "&nation=" + nation : ''
+                language ? option += "&language=" + language : ''
+                nation ? option += "&nation=" + nation : ''
             }
 
 

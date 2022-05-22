@@ -7,7 +7,7 @@ import { AllRealms } from "../../../../..";
 
 class WOTBUser extends BaseClass {
 
-    app: { id: string, realm?: AllRealms }
+    private app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
         this.app = { id: app_id, realm: realm }

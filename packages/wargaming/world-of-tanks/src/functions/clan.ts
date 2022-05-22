@@ -7,7 +7,7 @@ import { AllRealms } from '../../../../..'
 
 class WOTClan extends BaseClass {
 
-    app: { id: string, realm?: string }
+    private app: { id: string, realm?: string }
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
         this.app = { id: app_id, realm: realm }
