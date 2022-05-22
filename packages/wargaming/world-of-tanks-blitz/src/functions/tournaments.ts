@@ -42,7 +42,7 @@ class WOTBTournaments extends BaseClass {
                 options.limit = 25
             }
 
-            option = option + '&limit=' + options.limit
+            option += '&limit=' + options.limit
         }
 
         const langs = ['en', 'es', 'pt']
@@ -53,15 +53,15 @@ class WOTBTournaments extends BaseClass {
                 warn("[WARCORD WARNING] This language is not supported. Using the default language...")
             }
 
-            option = option + '&language=' + options.lang
+            option += '&language=' + options.lang
         }
 
-        options?.search ? option = option + '&search=' + options?.search : ''
+        options?.search ? option += '&search=' + options?.search : ''
 
         if (options?.status && options?.status?.length > 1) {
-            option = option + '&status=' + (<string[]>options.status).join('%2C+')
+            option += '&status=' + (<string[]>options.status).join('%2C+')
         } else {
-            options?.status ? option = option + '&status=' + options?.status : ''
+            options?.status ? option += '&status=' + options?.status : ''
         }
 
         var data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/list/?application_id=${this.app.id}${option}`)).data
@@ -81,7 +81,7 @@ class WOTBTournaments extends BaseClass {
 
         let option = ''
         if (options && options?.language) {
-            option = option + `&language=${options.language}`
+            option += `&language=${options.language}`
         }
         const data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/info/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data
         if (data.status == "error") return data.error
@@ -117,11 +117,11 @@ class WOTBTournaments extends BaseClass {
             }
 
             if (team_id) {
-                team_id.length > 1 ? option = option + '&team_id=' + (<string[]>team_id).join('+') : option = option + '&team_id=' + team_id
+                team_id.length > 1 ? option += '&team_id=' + (<string[]>team_id).join('+') : option += '&team_id=' + team_id
             }
 
-            language ? option = option + '&language=' + language : ''
-            limit ? option = option + '&limit=' + limit : ''
+            language ? option += '&language=' + language : ''
+            limit ? option += '&limit=' + limit : ''
         }
 
         const data = (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/standings/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data
@@ -165,13 +165,13 @@ class WOTBTournaments extends BaseClass {
                     throw Error("[WARCORD] The maximum of an search query is 50 characters and the minimum is 2 characters.")
                 }
 
-                account_id ? option = option + `&account_id=${account_id}` : ''
-                clan_id ? option = option + `&clan_id=${clan_id}` : ''
-                language ? option = option + `&language=${language}` : ''
-                limit ? option = option + `&limit=${limit}` : ''
-                search ? option = option + `&search=${search}` : ''
-                status ? option = option + `&status=${status}` : ''
-                team ? option = option + `&team=${team}` : ''
+                account_id ? option += `&account_id=${account_id}` : ''
+                clan_id ? option += `&clan_id=${clan_id}` : ''
+                language ? option += `&language=${language}` : ''
+                limit ? option += `&limit=${limit}` : ''
+                search ? option += `&search=${search}` : ''
+                status ? option += `&status=${status}` : ''
+                team ? option += `&team=${team}` : ''
             }
 
             const data = (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/tournaments/teams/?application_id=${this.app.id}&tournament_id=${tourID}${option}`)).data

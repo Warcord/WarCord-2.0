@@ -45,7 +45,7 @@ class WOTTank extends BaseClass {
                 options.limit = 100
             }
 
-            option = option + '&limit=' + options.limit
+            option += '&limit=' + options.limit
         }
 
         const langs = [ "cs", "de", "en", "es", "fr", "pl", "ru", "th", "zh-tw", "tr", "zh-cn", "ko", "vi" ]
@@ -56,12 +56,12 @@ class WOTTank extends BaseClass {
                 warn("[WARCORD WARNING] This language is not supported. Using the default language...")
             }
 
-            option = option + '&language=' + options.lang
+            option += '&language=' + options.lang
         }
 
-        type ? option = option + '&type=' + type : ''
-        nation ? option = option + '&nation=' + nation : ''
-        tier ? option = option + '&tier=' + tier : ''
+        type ? option += '&type=' + type : ''
+        nation ? option += '&nation=' + nation : ''
+        tier ? option += '&tier=' + tier : ''
 
         let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data
         if (data.status == "error") return data.error
