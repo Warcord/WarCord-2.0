@@ -3,7 +3,7 @@ import axios from "axios";
 import { WOTBTankResolve } from '../interfaces/tank/tank-resolve'
 import { AllRealms } from "../../../../..";
 
-class WOTBTank extends BaseClass {
+class WOTBTankopedia extends BaseClass {
 
     private app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
@@ -24,4 +24,4 @@ class WOTBTank extends BaseClass {
     }
 }
 
-export { WOTBTank }
+export { WOTBTankopedia }

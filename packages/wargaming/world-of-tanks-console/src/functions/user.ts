@@ -4,7 +4,7 @@ import axios from "axios";
 import { AcceptedLangs, SearchType } from "../interfaces/general/types";
 import { WarCordError } from "../../../../warcord/functions/error";
 
-export = class WOTCUser extends BaseClass {
+export class WOTCUser extends BaseClass {
 
     private app: { id: string }
     private errorController: WarCordError

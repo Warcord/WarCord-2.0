@@ -5,7 +5,7 @@ import { AcceptedLangs } from "../interfaces/general/types";
 import { WarCordError } from "../../../../warcord/functions/error";
 import { WOTCClanSearch } from "../interfaces/clan/search";
 
-export = class WOTCClan extends BaseClass {
+export class WOTCClan extends BaseClass {
 
     private app: { id: string }
     private errorController: WarCordError

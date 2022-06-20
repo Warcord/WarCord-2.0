@@ -23,16 +23,19 @@ class WOTClan extends base_1.BaseClass {
     /**
      * @description Get a clan in World of Tanks.
      * @param {string} clanID ID of clan.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Promise<WOTClanResolve | null>} Clan data.
      * @example
      * ...
      * const clan = await <Warcord>.wg.wot.clan.get('ID of Clan')
      */
-    get(clanID) {
+    get(clanID, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
+            const real = options && (options === null || options === void 0 ? void 0 : options.realm) ? options.realm : this.app.realm;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${real}/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             data = data.data[clanID];
             return {
                 leader_id: data.leader_id,
@@ -62,6 +65,8 @@ class WOTClan extends base_1.BaseClass {
     /**
      * @description Get a array with clans data of respective name.
      * @param {string} clanNameOrTag Name or Tag of clan.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Promise<WOTClanSearchResolve[] | null>} Array with clan data.
      * @example
      * ...
@@ -71,11 +76,12 @@ class WOTClan extends base_1.BaseClass {
      * const clan = await <Warcord>.wg.wot.clan.get(searchingClan[0].clan_id)
      * //this returns the first clan data.
      */
-    search(clanNameOrTag) {
+    search(clanNameOrTag, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
+            const real = options && (options === null || options === void 0 ? void 0 : options.realm) ? options.realm : this.app.realm;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${real}/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             data = data.data;
             if (!data || data.length <= 0)
                 return null;
@@ -85,16 +91,19 @@ class WOTClan extends base_1.BaseClass {
     /**
      * @description Get the rating of an Clan.
      * @param {string | number} clanID ID of Clan.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Object} Clan rating.
      * @example
      * ...
      * const ratingOfClan = await <Warcord>.wg.wot.clan.rating('ID of Clan')
      */
-    rating(clanID) {
+    rating(clanID, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
+            const real = options && (options === null || options === void 0 ? void 0 : options.realm) ? options.realm : this.app.realm;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${real}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             data = data.data[clanID];
             return data;
         });
@@ -102,15 +111,18 @@ class WOTClan extends base_1.BaseClass {
     /**
      * @description Get the clan member data.
      * @param {string | number} memberID ID of Clan Member.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Promise<WOTMember | null>} Clan Member data.
      * @example
      * const memberOfClan = await <Warcord>.wg.wot.clan.member('ID of Member')
      */
-    member(memberID) {
+    member(memberID, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data;
+            const real = options && (options === null || options === void 0 ? void 0 : options.realm) ? options.realm : this.app.realm;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${real}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             return data.data[memberID];
         });
     }

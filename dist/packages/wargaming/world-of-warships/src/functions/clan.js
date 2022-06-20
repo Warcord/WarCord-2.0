@@ -29,7 +29,7 @@ class WOWSClans extends base_1.BaseClass {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             data = data.data[clanID];
             return data;
         });
@@ -43,7 +43,7 @@ class WOWSClans extends base_1.BaseClass {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield (yield axios_1.default.get(`https://api.worldofwarships.${this.app.realm}/wows/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             data = data.data;
             if (!data || data.length <= 0)
                 return null;
