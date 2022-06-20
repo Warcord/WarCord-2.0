@@ -1,9 +1,3 @@
-import { WOTClanResolve } from './packages/wargaming/world-of-tanks/src/interfaces/clan/clan-resolve';
-import { WOTClanSearchResolve } from './packages/wargaming/world-of-tanks/src/interfaces/clan/search-resolve';
-import { WOTTanksResolve } from './packages/wargaming/world-of-tanks/src/interfaces/tank/tank-resolve';
-import { WOTTopTanksResolve } from './packages/wargaming/world-of-tanks/src/interfaces/tank/top-tanks';
-import { WOTUserResolve } from './packages/wargaming/world-of-tanks/src/interfaces/user/user-return';
-import { UserSearchResolve } from './packages/wargaming/build/interfaces/search-resolve';
 import { BaseClass } from './builds/class/base';
 import { WOTUser } from './packages/wargaming/world-of-tanks/src/functions/user';
 import { WOTTankopedia } from './packages/wargaming/world-of-tanks/src/functions/tank';
@@ -18,8 +12,14 @@ import { WOWSClans } from './packages/wargaming/world-of-warships/src/functions/
 import { WOTCUser } from './packages/wargaming/world-of-tanks-console/src/functions/user';
 import { WOTCClan } from './packages/wargaming/world-of-tanks-console/src/functions/clan';
 import { WOTCTankopedia } from './packages/wargaming/world-of-tanks-console/src/functions/tankopedia';
-declare type AllRealms = 'na' | 'eu' | 'ru' | 'asia';
-declare class WarCord extends BaseClass {
+import { WOTClanResolve } from './packages/wargaming/world-of-tanks/src/interfaces/clan/clan-resolve';
+import { WOTClanSearchResolve } from './packages/wargaming/world-of-tanks/src/interfaces/clan/search-resolve';
+import { WOTTanksResolve } from './packages/wargaming/world-of-tanks/src/interfaces/tank/tank-resolve';
+import { WOTTopTanksResolve } from './packages/wargaming/world-of-tanks/src/interfaces/tank/top-tanks';
+import { WOTUserResolve } from './packages/wargaming/world-of-tanks/src/interfaces/user/user-return';
+import { UserSearchResolve } from './packages/wargaming/build/interfaces/search-resolve';
+export declare type AllRealms = 'na' | 'eu' | 'ru' | 'asia';
+export declare class WarCord extends BaseClass {
     app: {
         id: string;
         realm?: AllRealms;
@@ -53,6 +53,4 @@ declare class WarCord extends BaseClass {
     private idChecker;
     private realmChecker;
 }
-export { WarCord };
 export { WOTClanResolve, WOTClanSearchResolve, WOTTanksResolve, WOTTopTanksResolve, WOTUserResolve, UserSearchResolve };
-export { AllRealms };

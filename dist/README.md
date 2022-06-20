@@ -2,8 +2,9 @@
 
 This is a package to simplify use of Wargaming API.
 
+[![BUILD](https://img.shields.io/github/workflow/status/Warcord/WarCord-Lib/CodeQL)](https://github.com/Warcord/WarCord-Lib/actions/workflows/codeql-analysis.yml)    [![NPM_DOWNLOADS](https://img.shields.io/npm/dm/warcord)](https://nodei.co/npm/warcord/)    [![NPM_LICENSE](https://img.shields.io/npm/l/warcord)](https://nodei.co/npm/warcord/)     [![NPM_VERSION](https://img.shields.io/npm/v/warcord)](https://nodei.co/npm/warcord/)     [![PULL_REQUESTS](https://img.shields.io/github/issues-pr/Warcord/WarCord-Lib)](https://github.com/Warcord/WarCord-Lib/pulls)
+
 [![NPM](https://nodei.co/npm/warcord.png)](https://nodei.co/npm/warcord/)
-[![BUILD](https://img.shields.io/appveyor/build/Warcord/WarCord-Lib)](https://github.com/Warcord/WarCord-Lib)
 
 ## Initial Files:
 ```js

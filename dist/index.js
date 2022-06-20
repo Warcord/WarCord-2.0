@@ -64,7 +64,7 @@ class WarCord extends base_1.BaseClass {
             'asia'
         ];
         if (!realms.includes(realm)) {
-            (0, console_1.warn)('[WarCord] Your API Lang is not valid. Now, the default is in use.');
+            (0, console_1.warn)('[WarCord] Your API Lang is not valid. Using default...');
             return 'com';
         }
         if (realm == 'na') {
