@@ -1,0 +1,9 @@
+const { Client } = require('discord.js')
+const { WarCord } = require('warcord')
+
+const client = new Client() // Put your Intents
+const warcord = new WarCord('your-app-id')
+
+client.login('discord-token')
+
+client.warcord = warcord

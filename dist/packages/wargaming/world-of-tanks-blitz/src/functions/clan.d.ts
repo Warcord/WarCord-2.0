@@ -3,10 +3,7 @@ import { WOTBClanResolve } from '../interfaces/clan/clan-resolve';
 import { ClanSearchBlitz } from "../interfaces/clan/search";
 import { AllRealms } from "../../../../..";
 declare class WOTBClan extends BaseClass {
-    app: {
-        id: string;
-        realm?: AllRealms;
-    };
+    private app;
     constructor(app_id: string, realm?: AllRealms);
     /**
      * @description Get a clan in World of Tanks Blitz.

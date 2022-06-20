@@ -32,7 +32,7 @@ class WOTBClan extends base_1.BaseClass {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.realm}/wotb/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             return data.data[clanID];
         });
     }

@@ -16,14 +16,19 @@ class WOTClan extends BaseClass {
     /**
      * @description Get a clan in World of Tanks.
      * @param {string} clanID ID of clan.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Promise<WOTClanResolve | null>} Clan data.
      * @example
      * ...
      * const clan = await <Warcord>.wg.wot.clan.get('ID of Clan')
      */
 
-    public async get(clanID: number | string): Promise<WOTClanResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
+    public async get(clanID: number | string, options?: { realm?: AllRealms }): Promise<WOTClanResolve | null> {
+
+        const real = options && options?.realm ? options.realm : this.app.realm
+
+        let data = await (await axios.get(`https://api.worldoftanks.${real}/wot/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
         if (data.status == "error") return data.error
         data = data.data[clanID]
         return {
@@ -54,6 +59,8 @@ class WOTClan extends BaseClass {
     /**
      * @description Get a array with clans data of respective name.
      * @param {string} clanNameOrTag Name or Tag of clan.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Promise<WOTClanSearchResolve[] | null>} Array with clan data.
      * @example
      * ...
@@ -63,8 +70,11 @@ class WOTClan extends BaseClass {
      * const clan = await <Warcord>.wg.wot.clan.get(searchingClan[0].clan_id)
      * //this returns the first clan data.
      */
-    public async search(clanNameOrTag: string): Promise<WOTClanSearchResolve | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
+    public async search(clanNameOrTag: string, options?: { realm?: AllRealms }): Promise<WOTClanSearchResolve[] | null> {
+
+        const real = options && options?.realm ? options.realm : this.app.realm
+
+        let data = await (await axios.get(`https://api.worldoftanks.${real}/wot/clans/list/?application_id=${this.app.id}&search=${clanNameOrTag}`)).data
         if (data.status == "error") return data.error
         data = data.data
         if (!data || data.length <= 0) return null
@@ -74,13 +84,18 @@ class WOTClan extends BaseClass {
     /**
      * @description Get the rating of an Clan.
      * @param {string | number} clanID ID of Clan.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Object} Clan rating.
      * @example
      * ...
      * const ratingOfClan = await <Warcord>.wg.wot.clan.rating('ID of Clan')
      */
-    public async rating(clanID: string | number): Promise<any | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data
+    public async rating(clanID: string | number, options?: { realm?: AllRealms }): Promise<any | null> {
+
+        const real = options && options?.realm ? options.realm : this.app.realm
+
+        let data = await (await axios.get(`https://api.worldoftanks.${real}/wot/clanratings/clans/?application_id=${this.app.id}&clan_id=${clanID}`)).data
         if (data.status == "error") return data.error
         data = data.data[clanID]
         return data
@@ -89,12 +104,17 @@ class WOTClan extends BaseClass {
     /**
      * @description Get the clan member data.
      * @param {string | number} memberID ID of Clan Member.
+     * @param {Object} options Options Object.
+     * @property {AllRealms} options.realm The realm of query.
      * @returns {Promise<WOTMember | null>} Clan Member data.
      * @example
      * const memberOfClan = await <Warcord>.wg.wot.clan.member('ID of Member')
      */
-    public async member(memberID: string | number): Promise<WOTMember | null> {
-        let data = await (await axios.get(`https://api.worldoftanks.${this.app.realm}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data
+    public async member(memberID: string | number, options?: { realm?: AllRealms }): Promise<WOTMember | null> {
+
+        const real = options && options?.realm ? options.realm : this.app.realm
+
+        let data = await (await axios.get(`https://api.worldoftanks.${real}/wot/clans/accountinfo/?application_id=${this.app.id}&account_id=${memberID}`)).data
         if (data.status == "error") return data.error
 
         return data.data[memberID]
