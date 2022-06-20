@@ -24,7 +24,9 @@
     "wotb",
     "worldoftanksblitz",
     "wows",
-    "worldofwarships"
+    "worldofwarships",
+    "wargaming.net",
+    "open-source"
   ],
   "bugs": {
     "url": "https://github.com/Warcord/WarCord-Lib/issues"

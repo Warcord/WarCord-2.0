@@ -6,7 +6,7 @@ import { AllRealms } from "../../../../..";
 
 class WOTBClan extends BaseClass {
 
-    app: { id: string, realm?: AllRealms }
+    private app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
         this.app = { id: app_id, realm: realm }
@@ -23,7 +23,7 @@ class WOTBClan extends BaseClass {
 
     public async get(clanID: string | number): Promise<WOTBClanResolve | null> {
         let data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/clans/info/?application_id=${this.app.id}&clan_id=${clanID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
         return data.data[clanID]
     }
 

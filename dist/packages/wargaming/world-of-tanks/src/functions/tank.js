@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WOTTank = void 0;
+exports.WOTTankopedia = void 0;
 const axios_1 = __importDefault(require("axios"));
 const base_1 = require("../../../../../builds/class/base");
 const console_1 = require("console");
-class WOTTank extends base_1.BaseClass {
+class WOTTankopedia extends base_1.BaseClass {
     constructor(app_id, realm) {
         super(app_id);
         this.app = { id: app_id, realm: realm };
@@ -27,16 +27,18 @@ class WOTTank extends base_1.BaseClass {
      * @param {?WOTNations} nation The nation of tank.
      * @param {?string} tier The tier of tank.
      * @param {?Object} options - The options object.
+     * @property {?AllRealms} options.realm The realm of query.
      * @property {?number} [options.limit=100] Limit of returned data.
      * @property {?WOTLangs} [options.lang=en] The language of Texts.
      * @returns {Promise(<WOTTanksResolve | null>)} Returns all tanks finded.
      * @exemple
      * ...
      *
-     * const getTank = await <Warcord>.wg.tank.find('heavyTank')
+     * const getTank = await <Warcord>.wot.tank.find('heavyTank')
      */
     find(type, nation, tier, options) {
         return __awaiter(this, void 0, void 0, function* () {
+            const real = options && (options === null || options === void 0 ? void 0 : options.realm) ? options.realm : this.app.realm;
             if (!type && !nation && !tier)
                 throw Error("[WARCORD] It's necessary an tankName to use this method.");
             let option = '';
@@ -47,7 +49,7 @@ class WOTTank extends base_1.BaseClass {
                 if (options.limit > 100 || options.limit <= 0) {
                     options.limit = 100;
                 }
-                option = option + '&limit=' + options.limit;
+                option += '&limit=' + options.limit;
             }
             const langs = ["cs", "de", "en", "es", "fr", "pl", "ru", "th", "zh-tw", "tr", "zh-cn", "ko", "vi"];
             if (options && options.lang) {
@@ -55,14 +57,14 @@ class WOTTank extends base_1.BaseClass {
                     options.lang = "en";
                     (0, console_1.warn)("[WARCORD WARNING] This language is not supported. Using the default language...");
                 }
-                option = option + '&language=' + options.lang;
+                option += '&language=' + options.lang;
             }
-            type ? option = option + '&type=' + type : '';
-            nation ? option = option + '&nation=' + nation : '';
-            tier ? option = option + '&tier=' + tier : '';
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data;
+            type ? option += '&type=' + type : '';
+            nation ? option += '&nation=' + nation : '';
+            tier ? option += '&tier=' + tier : '';
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${real}/wot/encyclopedia/vehicles/?application_id=${this.app.id}${option}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             return data.data;
         });
     }
@@ -72,13 +74,14 @@ class WOTTank extends base_1.BaseClass {
      * @returns {Promise<WOTTanksResolve | null>} Object with Tank Data.
      * @example
      * ...
-     * const tank = await .wg.blitz.tank.get('ID of Tank')
+     * const tank = await warcord.wot.tank.get('ID of Tank')
      */
-    get(tankID) {
+    get(tankID, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${this.app.realm}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
+            const real = options && (options === null || options === void 0 ? void 0 : options.realm) ? options.realm : this.app.realm;
+            let data = yield (yield axios_1.default.get(`https://api.worldoftanks.${real}/wot/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             data = data.data[tankID];
             return {
                 is_wheeled: data.is_wheeled,
@@ -110,4 +113,4 @@ class WOTTank extends base_1.BaseClass {
         });
     }
 }
-exports.WOTTank = WOTTank;
+exports.WOTTankopedia = WOTTankopedia;

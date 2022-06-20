@@ -3,9 +3,9 @@ import axios from "axios";
 import { WOTBTankResolve } from '../interfaces/tank/tank-resolve'
 import { AllRealms } from "../../../../..";
 
-class WOTBTank extends BaseClass {
+class WOTBTankopedia extends BaseClass {
 
-    app: { id: string, realm?: AllRealms }
+    private app: { id: string, realm?: AllRealms }
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
         this.app = { id: app_id, realm: realm }
@@ -18,10 +18,10 @@ class WOTBTank extends BaseClass {
      */
     public async get(tankID: string | number): Promise<WOTBTankResolve | null> {
         var data = await (await axios.get(`https://api.wotblitz.${this.app.realm}/wotb/encyclopedia/vehicles/?application_id=${this.app.id}&tank_id=${tankID}`)).data
-        if (data.status == "error") return null
+        if (data.status == "error") return data.error
 
         return data.data[tankID]
     }
 }
 
-export { WOTBTank }
+export { WOTBTankopedia }

@@ -32,7 +32,7 @@ class WOTBUser extends base_1.BaseClass {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield (yield axios_1.default.get(`https://api.wotblitz.${this.app.realm}/wotb/account/info/?application_id=${this.app.id}&account_id=${userID}`)).data;
             if (data.status == "error")
-                return null;
+                return data.error;
             data = data.data[userID];
             return {
                 statistics: {
