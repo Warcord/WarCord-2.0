@@ -468,7 +468,7 @@ Get a tank by ID.
 **Example**  
 ```js
 ...
-const tank = await .blitz.tank.get('ID of Tank')
+const tank = await <WarCord>.wot.tank.get('ID of Tank')
 ```
 <a name="WOTCTankopedia"></a>
 
