@@ -12,9 +12,6 @@ const { WarCord } = require('warcord')
 const warcord = new WarCord('your-app-id')
 ```
 
-# Useful Links
-- [Discord Server](https://discord.gg/aJdAzhVfRb)
-
 # Credits
 
 - [GardZock](https://github.com/GardZock) (Owner).
