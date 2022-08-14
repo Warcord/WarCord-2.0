@@ -77,7 +77,7 @@ class WOTTankopedia extends BaseClass {
      * @returns {Promise<WOTTanksResolve | null>} Object with Tank Data.
      * @example
      * ...
-     * const tank = await warcord.wot.tank.get('ID of Tank')
+     * const tank = await <WarCord>.wot.tank.get('ID of Tank')
      */
     
     public async get(tankID: number | string, options?: { realm?: AllRealms }): Promise<WOTTanksResolve | null> {

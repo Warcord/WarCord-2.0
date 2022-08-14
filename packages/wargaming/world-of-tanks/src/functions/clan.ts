@@ -21,7 +21,7 @@ class WOTClan extends BaseClass {
      * @returns {Promise<WOTClanResolve | null>} Clan data.
      * @example
      * ...
-     * const clan = await <Warcord>.wg.wot.clan.get('ID of Clan')
+     * const clan = await <Warcord>.wot.clan.get('ID of Clan')
      */
 
     public async get(clanID: number | string, options?: { realm?: AllRealms }): Promise<WOTClanResolve | null> {
@@ -64,10 +64,10 @@ class WOTClan extends BaseClass {
      * @returns {Promise<WOTClanSearchResolve[] | null>} Array with clan data.
      * @example
      * ...
-     * const searchingClan = await <Warcord>.wg.wot.clan.search('Name or Tag of Clan')
+     * const searchingClan = await <Warcord>.wot.clan.search('Name or Tag of Clan')
      * //this returns an array of the clans found.
      *
-     * const clan = await <Warcord>.wg.wot.clan.get(searchingClan[0].clan_id)
+     * const clan = await <Warcord>.wot.clan.get(searchingClan[0].clan_id)
      * //this returns the first clan data.
      */
     public async search(clanNameOrTag: string, options?: { realm?: AllRealms }): Promise<WOTClanSearchResolve[] | null> {
@@ -89,7 +89,7 @@ class WOTClan extends BaseClass {
      * @returns {Object} Clan rating.
      * @example
      * ...
-     * const ratingOfClan = await <Warcord>.wg.wot.clan.rating('ID of Clan')
+     * const ratingOfClan = await <Warcord>.wot.clan.rating('ID of Clan')
      */
     public async rating(clanID: string | number, options?: { realm?: AllRealms }): Promise<any | null> {
 
@@ -108,7 +108,7 @@ class WOTClan extends BaseClass {
      * @property {AllRealms} options.realm The realm of query.
      * @returns {Promise<WOTMember | null>} Clan Member data.
      * @example
-     * const memberOfClan = await <Warcord>.wg.wot.clan.member('ID of Member')
+     * const memberOfClan = await <Warcord>.wot.clan.member('ID of Member')
      */
     public async member(memberID: string | number, options?: { realm?: AllRealms }): Promise<WOTMember | null> {
 
