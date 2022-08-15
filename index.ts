@@ -24,6 +24,7 @@ import { WOTTanksResolve } from './packages/wargaming/world-of-tanks/src/interfa
 import { WOTTopTanksResolve } from './packages/wargaming/world-of-tanks/src/interfaces/tank/top-tanks'
 import { WOTUserResolve } from './packages/wargaming/world-of-tanks/src/interfaces/user/user-return'
 import { UserSearchResolve } from './packages/wargaming/build/interfaces/search-resolve'
+import { WOWPPlayer } from './packages/wargaming/world-of-warplanes/src/functions/player'
 
 export declare type AllRealms = | 'na' | 'eu' | 'ru' | 'asia'
 
@@ -54,6 +55,9 @@ export class WarCord extends BaseClass {
         clan: WOTCClan,
         pedia: WOTCTankopedia
     }
+    wowp: { 
+        player: WOWPPlayer
+    }
 
     /**
      * @param {string} app_id The ID of your WarGaming App.
@@ -82,6 +86,9 @@ export class WarCord extends BaseClass {
             user: new WOTCUser(this.app.id),
             clan: new WOTCClan(this.app.id),
             pedia: new WOTCTankopedia(this.app.id)
+        }
+        this.wowp = {
+            player: new WOWPPlayer(this.app.id)
         }
     }
 

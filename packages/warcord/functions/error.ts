@@ -1,8 +1,8 @@
 import { emitWarning } from "process"
 
-type AcceptedTypes = "WARCORD" | "API"
+export type AcceptedTypes = "WARCORD" | "API"
 
-interface APIError {
+export interface APIError {
     field: string,
     message: string,
     code: number,
