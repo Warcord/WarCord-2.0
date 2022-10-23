@@ -14,7 +14,7 @@ const warcord = new WarCord('your-app-id')
 
 # Credits
 
-- [GardZock](https://github.com/GardZock) (Owner).
+- [GardZock](https://github.com/GardZock).
 
 > World of Tanks
 
