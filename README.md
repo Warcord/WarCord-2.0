@@ -6,6 +6,8 @@ This is a package to simplify use of Wargaming API.
 
 [![NPM](https://nodei.co/npm/warcord.png)](https://nodei.co/npm/warcord/)
 
+---
+
 ## Initial Files:
 ```js
 const { WarCord } = require('warcord')
@@ -15,6 +17,8 @@ const warcord = new WarCord('your-app-id')
 # Credits
 
 - [GardZock](https://github.com/GardZock).
+
+---
 
 > World of Tanks
 
@@ -37,6 +41,8 @@ const warcord = new WarCord('your-app-id')
 > World of Tanks Console
 - [Clan](#WOTCClan)
 - [Tankopedia](#WOTCTankopedia)
+
+---
 
 <a name="WOTCClan"></a>
 
