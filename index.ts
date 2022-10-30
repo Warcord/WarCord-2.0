@@ -24,6 +24,8 @@ import { WOTTanksResolve } from './packages/wargaming/world-of-tanks/src/interfa
 import { WOTTopTanksResolve } from './packages/wargaming/world-of-tanks/src/interfaces/tank/top-tanks'
 import { WOTUserResolve } from './packages/wargaming/world-of-tanks/src/interfaces/user/user-return'
 import { UserSearchResolve } from './packages/wargaming/build/interfaces/search-resolve'
+import { WOWPPlayer } from './packages/wargaming/world-of-warplanes/src/functions/player'
+import { WOWPAirCraft } from './packages/wargaming/world-of-warplanes/src/functions/aircraft'
 
 export declare type AllRealms = | 'na' | 'eu' | 'ru' | 'asia'
 
@@ -54,10 +56,14 @@ export class WarCord extends BaseClass {
         clan: WOTCClan,
         pedia: WOTCTankopedia
     }
+    wowp: { 
+        player: WOWPPlayer,
+        planes: WOWPAirCraft
+    }
 
     /**
      * @param {string} app_id The ID of your WarGaming App.
-     * @param {string} [realm=na] Location language. Not valid for World of Tanks Console (WOTC).
+     * @param {string} [realm="na"] Location language. Not valid for World of Tanks Console (WOTC).
      */
     constructor(app_id: string, realm?: AllRealms) {
         super(app_id)
@@ -82,6 +88,10 @@ export class WarCord extends BaseClass {
             user: new WOTCUser(this.app.id),
             clan: new WOTCClan(this.app.id),
             pedia: new WOTCTankopedia(this.app.id)
+        }
+        this.wowp = {
+            player: new WOWPPlayer(this.app.id),
+            planes: new WOWPAirCraft(this.app.id)
         }
     }
 

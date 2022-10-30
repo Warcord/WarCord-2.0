@@ -21,10 +21,10 @@ class WOTUser extends BaseClass {
      * @returns {Promise<UserSearchResolve[] | null>} Object Array with users data.
      * @example
      * ...
-     * const searchingUser = await <Warcord>.wg.wot.user.search('Wargaming NickName of User')
+     * const searchingUser = await <Warcord>.wot.user.search('Wargaming NickName of User')
      * //this returns an array of the users found.
      *
-     * const user = await <Warcord>.wg.wot.user.get(searchingUser[0].id)
+     * const user = await <Warcord>.wot.user.get(searchingUser[0].id)
      * //this returns the first user data.
      */
 
@@ -45,7 +45,7 @@ class WOTUser extends BaseClass {
      * @returns {Promise<WOTUserResolve | null>} Object of user data.
      * @example
      * ...
-     * const user = await <Warcord>.wg.wot.user.get('Wargaming ID of User')
+     * const user = await <Warcord>.wot.user.get('Wargaming ID of User')
      */
 
     public async get(userID: number | string, options?: { realm?: AllRealms }): Promise<WOTUserResolve | null> {
@@ -67,7 +67,7 @@ class WOTUser extends BaseClass {
      * @returns {Promise<WOTTopTanksResolve[] | null>} Object Array with tanks data.
      * @example
      * ...
-     * const topTanks = await <Warcord>.wg.wot.user.topTanks('Wargaming ID of User')
+     * const topTanks = await <Warcord>.wot.user.topTanks('Wargaming ID of User')
      */
     public async topTanks(userID: number | string, options?: { realm?: AllRealms }): Promise<WOTTopTanksResolve[] | null> {
 
